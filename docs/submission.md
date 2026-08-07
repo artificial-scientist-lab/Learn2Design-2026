@@ -27,15 +27,9 @@ your whole submission directory is mounted read-only inside the container.
 Submissions are **encouraged** to use the publicly released [`Differometor-30k`](../dataset/README.md)
 dataset for pre-training surrogates, initial-point models, warm-starts, or
 any other purpose. There is no penalty for spending the entire budget on
-surrogate inference without ever calling `objective.value()`. If your surrogate
-is better than direct optimization, use your surrogate.
-
-What you may **not** do with the dataset:
-
-- Use it to construct a lookup table keyed on any feature of the private
-  evaluation topologies. Private topology specifications (IDs, hashes, parameter
-  ranges) are never published. Any submission found to encode test-set knowledge
-  is disqualified.
+surrogate inference while only calling `objective.value()` once. Just keep in
+mind that at least one (feasible) logging entry needs to be provided for a run
+to be valid.
 
 ---
 
