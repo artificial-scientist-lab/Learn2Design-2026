@@ -1,12 +1,36 @@
 # Submission rules
 
-## What you submit
+## Submission format
 
-A submission is a single `.py` file uploaded through the competition portal.
-The file must contain exactly one class that subclasses
-`OptimizationAlgorithm` from `dfbench.core`. The class may import any
-pip-installable Python package (see [Dependencies](#dependencies) for the one
-exception).
+Submit a ZIP archive containing the following two mandatory files at its root.
+Do not place them inside an enclosing directory.
+
+### `submission.py` — mandatory
+
+This file must define exactly one Python class that subclasses
+`dfbench.OptimizationAlgorithm`. The evaluator calls:
+
+```python
+MyAlgorithm.optimize(...)
+```
+
+### `requirements.txt` — mandatory
+
+List all required Python packages using [PEP 508](https://peps.python.org/pep-0508/)
+syntax, with one dependency per line:
+
+```text
+<package1>==1.2.3
+<package2>==4.5.6
+```
+
+### Additional files — optional
+
+You may include other files, such as Python modules or pretrained neural-network
+weights, in the archive.
+
+The evaluation script runs from the root of the extracted archive, so your code
+can access these files using relative paths.
 
 Competition entries are not submitted as public pull requests. This keeps
 unreleased methods private until the organizers evaluate them, which reduces
@@ -14,11 +38,6 @@ copying between participants.
 
 You may submit as often as you want. For each monthly evaluation, the organizers
 evaluate the last submission received before that month's deadline.
-
-If you need extra Python packages installed into the eval environment, ship a
-`requirements.txt` next to your `.py` file. If you need to bundle weights or
-data files, place them in the same directory and load them by relative path;
-your whole submission directory is mounted read-only inside the container.
 
 ---
 
@@ -73,22 +92,30 @@ Your submission may import any pip-installable Python package, with one exceptio
 
 The evaluation environment ships with a common base (`dfbench`, `differometor`,
 `jax`, `jaxlib` CUDA 13, `numpy`, `scipy`, `optax`, `cma`, `cmaes`, `torch`,
-`botorch`, `nevergrad`, `evosax`). If your submission needs anything else, ship
-a `requirements.txt` next to your submission file and we will install it into
-the eval environment before running you.
+`botorch`, `nevergrad`, `evosax`). The evaluator installs the packages listed in
+the mandatory root-level `requirements.txt` before running your algorithm.
 
 ---
 
 ## Evaluation procedure
 
-1. Your submission is placed in an isolated Docker container with no
-   network access. The filesystem is writable; the container is ephemeral
-   and discarded after the run, so anything you write is gone afterwards.
-2. For each evaluation, your submission is run on 10 new hidden topologies. For each topology, your `optimize()` is called once with a
-   fresh [`Objective`](dfbench/Objective-API-Reference.md), a fixed random seed, and the budget described above.
-3. After the run, the result for that topology is the minimum loss among logged setups with `is_feasible=True`.
-4. If your run has no feasible setup, that topology result is replaced by the best feasible loss from the organizers' random-search baseline on the same topology.
-5. Your score for the month is the arithmetic mean of the 10 topology results.
+1. Your ZIP archive is extracted into an isolated Docker container. The
+   evaluator verifies the two mandatory root files and installs the packages
+   listed in `requirements.txt`.
+2. The evaluator runs from the extracted archive root with no network access
+   and loads the algorithm class from `submission.py`. The filesystem is
+   writable; the container is ephemeral and discarded after the run, so
+   anything you write is gone afterwards.
+3. For each evaluation, your submission is run on 10 new hidden topologies. For
+   each topology, your `optimize()` is called once with a fresh
+   [`Objective`](dfbench/Objective-API-Reference.md), a fixed random seed, and
+   the budget described above.
+4. After the run, the result for that topology is the minimum loss among logged
+   setups with `is_feasible=True`.
+5. If your run has no feasible setup, that topology result is replaced by the
+   best feasible loss from the organizers' random-search baseline on the same
+   topology.
+6. Your score for the month is the arithmetic mean of the 10 topology results.
 
 ---
 

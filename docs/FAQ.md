@@ -47,7 +47,13 @@ The warmup time for the objective function (or gradient variants) takes around 2
 ## Getting Started & Submissions
 
 ### What exactly do I submit?
-You submit executable optimization algorithms, not fixed designs or parameter vectors; see the [submission rules](submission.md#what-you-submit). Your submission must be a Python class that subclasses `OptimizationAlgorithm` and implements the `optimize(self, objective, ...)` method.
+You submit a ZIP archive, not a fixed design or parameter vector. At the archive
+root it must contain `submission.py`, defining exactly one
+`dfbench.OptimizationAlgorithm` subclass, and `requirements.txt`, listing
+dependencies one per line using `<pacakge1>==1.2.3` syntax. Additional files, such as
+supporting modules or pretrained weights, may be included in the archive and
+accessed using relative paths. See the
+[submission rules](submission.md#submission-format).
 
 ### What is the `Objective` class and why must I use it?
 The [`Objective`](dfbench/Objective-API-Reference.md) class is the sole interface between your algorithm and the underlying physics simulation. It transparently handles:

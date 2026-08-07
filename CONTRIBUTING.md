@@ -6,7 +6,10 @@ By participating you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## Submitting an algorithm
 
-Submissions go through the competition portal, not through pull requests on this repo. Read [`docs/submission.md`](docs/submission.md) for the full rules (what you submit, the time budget, dependencies, disqualification criteria) and [`docs/scoring.md`](docs/scoring.md) for how your run is scored.
+Submission ZIP archives go through the competition portal, not through pull
+requests on this repo. Read [`docs/submission.md`](docs/submission.md) for the
+full rules (archive layout, time budget, dependencies, and disqualification
+criteria) and [`docs/scoring.md`](docs/scoring.md) for how your run is scored.
 
 ## Improving the framework, baselines, or docs
 

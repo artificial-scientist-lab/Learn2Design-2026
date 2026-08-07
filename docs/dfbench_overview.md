@@ -23,14 +23,6 @@ A quick summary of the methods you'll touch most often. Data logging is done aut
 | `objective.vmap_value_grad_and_hessian(params_batch)` | Batched `(losses, grads, Hessians)`. |
 | `objective.batched_value(…)`, `batched_grad(…)`, … | Aliases for the `vmap_*` methods above. |
 
-### Evaluation (aux — constrained problems only)
-
-| Method | Purpose |
-|---|---|
-| `objective.value_aux(params)` | `(loss, aux)` dict: `sensitivity_loss`, `penalty`, `is_feasible`, `violations`, `power_values`. |
-| `objective.value_and_grad_aux(params)` | Loss + gradient + aux in one pass. |
-| `objective.vmap_value_aux(...)`, `vmap_value_and_grad_aux(...)` | Batched aux variants. |
-
 ### Lifecycle & setup
 
 | Method / attribute | Purpose |
@@ -40,6 +32,14 @@ A quick summary of the methods you'll touch most often. Data logging is done aut
 | `objective.set_space_mode(unbounded, unit_mapping=None, inverse_unit_mapping=None)` | Switch bounded/unbounded space (and optionally the [0,1] mapping pair) before optimization. |
 | `objective.set_seed(seed)` | Seed the internal PRNG for reproducible `random_params*` draws. |
 | `objective.set_penalty_fn(fn)` | Swap the penalty function on constrained problems (`UIFOProblem`, …); retraces JIT paths. Use `relu_penalty`, `zero_penalty`, etc. |
+
+### Evaluation (aux — constrained problems only)
+
+| Method | Purpose |
+|---|---|
+| `objective.value_aux(params)` | `(loss, aux)` dict: `sensitivity_loss`, `penalty`, `is_feasible`, `violations`, `power_values`. |
+| `objective.value_and_grad_aux(params)` | Loss + gradient + aux in one pass. |
+| `objective.vmap_value_aux(...)`, `vmap_value_and_grad_aux(...)` | Batched aux variants. |
 
 ### Sampling
 

@@ -88,7 +88,8 @@ as the starting point for describing each team's method in this joint analysis.
 
 ## How it works
 
-- You submit your optimization algorithm.
+- You submit a ZIP archive containing your optimization algorithm, dependency
+  requirements, and any supporting files.
 - You can submit as often as you want; for each monthly evaluation we use the last submission before that month's deadline.
 - Each evaluation runs it on 10 new held-out hidden topologies on a single A100 GPU with an AMD EPYC 7302 CPU.
 - Time budget per topology: exactly 4 hours of wall-clock time after `objective.start_logging()`.
@@ -106,7 +107,8 @@ Your algorithm is allowed to evaluate the objective in batches via `jax.vmap` (t
 
 ## Getting Started
 
-A submission is one class subclassing `OptimizationAlgorithm`:
+A submission's `submission.py` file defines exactly one class subclassing
+`OptimizationAlgorithm`:
 
 ```python
 from dfbench import Objective, OptimizationAlgorithm
@@ -120,25 +122,32 @@ class MyAlgorithm(OptimizationAlgorithm):
     def optimize(
         self,
         objective: Objective,
-        init_params: Float[Array, "..."],
+        init_params: Float[Array, "..."] | None = None,
         random_seed: int | None = None,
         **kwargs,
     ) -> None:
-        # 1. Warm up JIT (compilation is free, not counted against the budget)
-        objective.warmup_value()
+        # 1. Configure the search space and apply random seeds
+        self.prepare(objective, unbounded=False, random_seed=random_seed)
 
-        # 2. Start the clock
+        params = init_params if init_params is not None else objective.random_params()
+
+        # 2. Warm up JIT (compilation is not counted against the budget)
+        objective.warmup_value()  # Use any other warmup_* method if desired
+
+        # 3. Start the clock
         objective.start_logging()
 
-        # 3. Optimization loop
-        params = init_params
+        # 4. Optimization loop
         while not objective.budget_exceeded:
-            # ... your update logic here, producing `params` ...
+            # ... YOUR update logic here, producing `params` ...
             loss = objective.value(params)  # automatically logged
 ```
 
-That is the entire contract. The `Objective` handles seeding, history,
-checkpointing, and budget enforcement. You write the loop. Execution examples of such classes are provided in [`learn2design/scripts/`](learn2design/scripts/) and below.
+That is the entire algorithm contract. The `Objective` handles seeding, history,
+checkpointing, and budget enforcement. You write the loop, place the class in
+`submission.py`, and package it as described in [Submitting](#submitting).
+Execution examples of such classes are provided in
+[`learn2design/scripts/`](learn2design/scripts/) and below.
 
 ### 1. Test with Constrained Voyager (Fast)
 <details>
@@ -359,7 +368,36 @@ gradient-based, evolutionary, surrogate-based, global_search, derivative_free an
 
 ## Submitting
 
-Information about how to submit will be provided roughly on 7th of August 2026.
+Submit a ZIP archive containing these two mandatory files at its root:
+
+```text
+submission.zip
+├── submission.py       # Defines exactly one dfbench.OptimizationAlgorithm subclass
+├── requirements.txt    # PEP 508 dependencies, one per line
+└── ...                 # Optional modules, weights, or other supporting files
+```
+
+`submission.py` must define exactly one Python class that subclasses
+`dfbench.OptimizationAlgorithm`. The evaluator calls:
+
+```python
+MyAlgorithm.optimize(...)
+```
+
+`requirements.txt` must list all required Python packages using
+[PEP 508](https://peps.python.org/pep-0508/) syntax, with one dependency per
+line:
+
+```text
+<package1>==1.2.3
+<package2>==4.5.6
+```
+
+You may include Python modules, pretrained neural-network weights, or other
+supporting files. The evaluation script runs from the root of the extracted
+archive, so access bundled files using relative paths. See the
+[submission rules](docs/submission.md) for the complete format, dependency
+policy, time budget, and evaluation procedure.
 
 
 ## Timeline
