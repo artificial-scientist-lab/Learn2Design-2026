@@ -2,8 +2,9 @@
 
 ## Submission format
 
-Submit a ZIP archive containing the following two mandatory files at its root.
-Do not place them inside an enclosing directory.
+Upload a ZIP archive to the [submission portal](https://submit.learn2design2026.com/)
+containing the following two mandatory files at its root. Do not place them
+inside an enclosing directory.
 
 ### `submission.py` — mandatory
 

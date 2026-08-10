@@ -89,7 +89,7 @@ as the starting point for describing each team's method in this joint analysis.
 ## How it works
 
 - You submit a ZIP archive containing your optimization algorithm, dependency
-  requirements, and any supporting files.
+  requirements, and any supporting files through the [submission portal](https://submit.learn2design2026.com/).
 - You can submit as often as you want; for each monthly evaluation we use the last submission before that month's deadline.
 - Each evaluation runs it on 10 new held-out hidden topologies on a single A100 GPU with an AMD EPYC 7302 CPU.
 - Time budget per topology: exactly 4 hours of wall-clock time after `objective.start_logging()`.
@@ -368,7 +368,8 @@ gradient-based, evolutionary, surrogate-based, global_search, derivative_free an
 
 ## Submitting
 
-Submit a ZIP archive containing these two mandatory files at its root:
+Upload a ZIP archive to the [submission portal](https://submit.learn2design2026.com/)
+containing these two mandatory files at its root:
 
 ```text
 submission.zip
@@ -405,9 +406,11 @@ policy, time budget, and evaluation procedure.
 | Date | Event |
 |---|---|
 | 09.07.2026 | Start of competition |
-| Expected: 07.08.2026 | Submission Platform opens |
-| 1st week of August, September, October | Release of public leaderboard from the latest submission before each monthly deadline |
-| 15.10.2026 | Final submission deadline |
+| 10.08.2026, 12:00 UTC | [Submission platform](https://submit.learn2design2026.com/) opens |
+| 26.08.2026, 23:59 UTC | First submission deadline |
+| 12.09.2026, 23:59 UTC | Second submission deadline |
+| 29.09.2026, 23:59 UTC | Third submission deadline |
+| 15.10.2026, 23:59 UTC | Final submission deadline |
 | Before workshop | Private leaderboard announced |
 
 ## Contact
@@ -417,6 +420,7 @@ Whenever possible, we recommend communicating with the organizers via GitHub iss
 ## Resources
 
 - **Website:** <https://www.learn2design2026.com/>
+- **Submission portal:** <https://submit.learn2design2026.com/>
 - **Repository:** <https://github.com/artificial-scientist-lab/Learn2Design-2026>
 - **Issues / questions:** <https://github.com/artificial-scientist-lab/Learn2Design-2026/issues>
 - **Dataset guide:** [`dataset/README.md`](dataset/README.md)

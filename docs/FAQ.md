@@ -52,8 +52,9 @@ root it must contain `submission.py`, defining exactly one
 `dfbench.OptimizationAlgorithm` subclass, and `requirements.txt`, listing
 dependencies one per line using `<pacakge1>==1.2.3` syntax. Additional files, such as
 supporting modules or pretrained weights, may be included in the archive and
-accessed using relative paths. See the
-[submission rules](submission.md#submission-format).
+accessed using relative paths. Upload the archive through the
+[submission portal](https://submit.learn2design2026.com/) and see the
+[submission rules](submission.md#submission-format) for complete requirements.
 
 ### What is the `Objective` class and why must I use it?
 The [`Objective`](dfbench/Objective-API-Reference.md) class is the sole interface between your algorithm and the underlying physics simulation. It transparently handles:

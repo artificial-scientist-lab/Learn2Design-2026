@@ -33,8 +33,9 @@ $$
 
 Loss magnitudes are comparable across different topologies.
 
-You may submit as often as you want; each monthly leaderboard evaluates the last
-submission received before that month's deadline.
+You may [submit through the competition portal](https://submit.learn2design2026.com/)
+as often as you want; each monthly leaderboard evaluates the last submission
+received before that month's deadline.
 
 ---
 
