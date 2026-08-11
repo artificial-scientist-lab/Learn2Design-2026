@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/github/license/artificial-scientist-lab/Learn2Design-2026)](https://github.com/artificial-scientist-lab/Learn2Design-2026/blob/main/LICENSE)
 [![image](https://img.shields.io/pypi/pyversions/dfbench.svg)](https://pypi.python.org/pypi/dfbench)
 [![GitHub](https://img.shields.io/badge/GitHub-dfbench-3232c8?logo=github&logoColor=white)](https://github.com/artificial-scientist-lab/Differometor-Benchmark)
+[![Static Badge](https://img.shields.io/badge/Codabench-Submit-4CB2AD)](https://submit.learn2design2026.com/competitions/4/)
 
 
 ## A physics experiment design competition for gravitational-wave detectors
