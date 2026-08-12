@@ -9,17 +9,18 @@
 ## A physics experiment design competition for gravitational-wave detectors
 
 <p align="center">
-Jonathan Klimesch<sup>1,2</sup>, Laurin Sefa<sup>1</sup>, Soham Basu<sup>1</sup>, Priya Kanagasabapathi<sup>1</sup>,<br>
-Sören Arlt<sup>1,2</sup>, Xuemei Gu<sup>3</sup>, Thomas Christie<sup>1</sup>, Colin Doumont<sup>1</sup>,<br>
-Andreas Freise<sup>4</sup>, Rana Adhikari<sup>5</sup>, Philipp Hennig<sup>1</sup>, Mario Krenn<sup>1</sup>
+Jonathan Klimesch<sup>1,2</sup>, Laurin Sefa<sup>1,3</sup>, Soham Basu<sup>1</sup>, Priya Kanagasabapathi<sup>1</sup>,<br>
+Sören Arlt<sup>1,2</sup>, Xuemei Gu<sup>4</sup>, Thomas Christie<sup>1</sup>, Colin Doumont<sup>1</sup>,<br>
+Andreas Freise<sup>5</sup>, Rana Adhikari<sup>6</sup>, Philipp Hennig<sup>1</sup>, Mario Krenn<sup>1</sup>
 </p>
 
 <p align="center">
 <sup>1</sup>Department for Computer Science, Faculty of Science, University of Tübingen, Tübingen, Germany<br>
 <sup>2</sup>Feyer, Tübingen, Germany<br>
-<sup>3</sup>Institut für Festkörpertheorie und Optik, Friedrich-Schiller-Universität Jena, Jena, Germany<br>
-<sup>4</sup>Nikhef, National Institute for Subatomic Physics, Amsterdam, The Netherlands<br>
-<sup>5</sup>Institute for Quantum Information and Matter, California Institute of Technology, Pasadena, CA, USA
+<sup>3</sup>Zuse School ELIZA, Darmstadt, Germany<br>
+<sup>4</sup>Institut für Festkörpertheorie und Optik, Friedrich-Schiller-Universität Jena, Jena, Germany<br>
+<sup>5</sup>Nikhef, National Institute for Subatomic Physics, Amsterdam, The Netherlands<br>
+<sup>6</sup>Institute for Quantum Information and Matter, California Institute of Technology, Pasadena, CA, USA
 </p>
 
 <p align="center">
