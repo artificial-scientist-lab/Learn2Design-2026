@@ -417,7 +417,7 @@ policy, time budget, and evaluation procedure.
 
 The first three submission deadlines (**26 August 2026**, **12 September 2026**, and **29 September 2026**) are used only for the **public leaderboard**. These evaluations allow you to see how well your solution performs before the final submission deadline. Participation in these intermediate evaluations is **optional**. You do not need to submit a solution by any of these three deadlines to remain eligible for a prize.
 
-The competition winners will be determined **only based on submissions received by the final deadline: 15 October 2026, Anywhere on Earth (AoE)**. In other words, even if your **first and only submission is on 15 October 2026**, you are still fully eligible to win the competition and receive a prize.
+The competition winners will be determined **only based on submissions received by the final deadline: 15 October 2026, Anywhere on Earth (AoE)**. In other words, even if you register on 15 October 2026 and make your first and only submission that same day, you are still fully eligible to win the competition and receive a prize.
 
 
 ## Contact
