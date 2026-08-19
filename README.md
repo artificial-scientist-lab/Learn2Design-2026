@@ -409,10 +409,10 @@ policy, time budget, and evaluation procedure.
 |---|---|
 | 09.07.2026 | Start of competition |
 | 10.08.2026, 12:00 UTC | [Submission platform](https://submit.learn2design2026.com/) opens |
-| 26.08.2026, 23:59 UTC | First submission deadline |
-| 12.09.2026, 23:59 UTC | Second submission deadline |
-| 29.09.2026, 23:59 UTC | Third submission deadline |
-| 15.10.2026, 23:59 UTC | Final submission deadline |
+| 26.08.2026, AoE | First submission deadline |
+| 12.09.2026, AoE | Second submission deadline |
+| 29.09.2026, AoE | Third submission deadline |
+| 15.10.2026, AoE | Final submission deadline |
 | Before workshop | Private leaderboard announced |
 
 ## Contact
