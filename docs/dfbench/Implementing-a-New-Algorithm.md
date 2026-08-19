@@ -190,7 +190,9 @@ random_seed, key = self.prepare(
 The problem instance wrapped by the `Objective` is private. Use the public
 Objective API directly: `obj.bounds` for the `(2, n_params)` bounds,
 `obj.n_params` for the dimension, `obj.problem_name` for the display name,
-`obj.value_function(unbounded=False)` for the raw bounded objective, and
+`obj.problem_spec` for the JSON-safe reconstructive problem configuration,
+`obj.optimization_pairs[i]` for the component/property context of parameter
+`i`, and
 `obj.penalty_fn` / `obj.power_thresholds` for the penalty contract.
 
 `prepare()` is called as `prepare(obj, unbounded, random_seed, algorithm_str=None, **kwargs)`. It sets `obj.unbounded`, `obj.algorithm_str`, seeds `np.random` and JAX, and returns `(random_seed, key)`. If `random_seed=None` is passed, a seed is generated via system entropy. You can also configure the Objective manually instead of calling `prepare()`.
@@ -241,7 +243,9 @@ Warmup can take seconds because it triggers JAX compilation. Do this **before** 
 obj.start_logging()
 ```
 
-This starts Objective logging and the 4-hour wall-clock timer. Warmup before this line is free; work after this line is timed.
+This starts Objective logging and the 4-hour wall-clock timer. Objective-provided
+`warmup_*()` calls before this line are free. Evaluation methods, raw callable
+getters, and `log_evaluation()` raise `RuntimeError` until this line has run.
 
 ### 6. Main loop
 
@@ -286,6 +290,10 @@ Some optimizers (e.g. Optax's L-BFGS) need to call `value_and_grad` *inside* a J
 2. Build your own JIT-compiled step
 3. After each step, call `obj.log_evaluation(params, loss, grad, hessian=None, aux=None)` to record the results
 
+Call `obj.start_logging()` before step 1. Unlike Objective-provided
+`warmup_*()` paths, construction and compilation of a custom raw-callable path
+are timed because the raw getter is intentionally unavailable before logging.
+
 `obj.value_function(unbounded=None)` follows the Objective's active space mode by default. Pass `unbounded=True` when the JIT loop works in unbounded coordinates and needs Objective's mapping into problem bounds; pass `unbounded=False` for bounded coordinates. `obj.value_function_aux(...)` follows the same mapping rules and returns an unlogged callable whose invocation yields `(loss, aux)`, or `None` when the problem has no aux objective. Neither callable logs anything.
 
 `log_evaluation()` never computes missing aux diagnostics. If the Objective has aux save tokens and the custom loop does not pass `aux`, each selected aux history receives `None` for that call. A custom loop that already computed a conforming aux pytree may pass it explicitly.
@@ -293,13 +301,13 @@ Some optimizers (e.g. Optax's L-BFGS) need to call `value_and_grad` *inside* a J
 To compute mapped aux inside the custom loop, preserve it as auxiliary output during differentiation:
 
 ```python
+obj.start_logging()
 value_aux_fn = obj.value_function_aux()
 if value_aux_fn is None:
     raise RuntimeError("this problem has no aux objective")
 value_and_grad_aux_fn = jax.jit(jax.value_and_grad(value_aux_fn, has_aux=True))
 
-_ = value_and_grad_aux_fn(params)  # JIT warmup before timing
-obj.start_logging()
+_ = value_and_grad_aux_fn(params)  # custom JIT compilation is timed
 (loss, aux), grads = value_and_grad_aux_fn(params)
 obj.log_evaluation(params, loss, grads, aux=aux)
 ```
@@ -307,7 +315,8 @@ obj.log_evaluation(params, loss, grads, aux=aux)
 Only aux fields selected in the Objective's `save` configuration are persisted.
 
 ```python
-# Get the raw function for JIT compilation
+# Start timing before obtaining the raw function.
+obj.start_logging()
 value_fn = obj.value_function(unbounded=True)
 value_and_grad_fn = jax.value_and_grad(value_fn)
 
@@ -318,8 +327,7 @@ def _step(params, opt_state):
     new_params = optax.apply_updates(params, updates)
     return new_params, new_state, loss, grads
 
-_ = _step(params, state)   # JIT warmup
-obj.start_logging()
+_ = _step(params, state)   # custom JIT compilation is timed
 
 while not obj.budget_exceeded:
     prior_params = params
@@ -437,7 +445,7 @@ params = optax.apply_updates(params, updates)
 - [ ] `optimize()` accepts `objective: Objective` as first arg
 - [ ] `optimize()` returns `None` (the `Objective` is mutated in place)
 - [ ] All evaluations go through `Objective` (`value*`, `vmap_*`, or `value_function(...)` plus `log_evaluation(...)`; no direct `problem.objective_function()` calls)
-- [ ] JIT warmup happens before `obj.start_logging()`
+- [ ] Objective `warmup_*()` happens before `obj.start_logging()`, while custom raw-callable compilation happens after it
 - [ ] `random_seed` is accepted, set, and printed
 - [ ] Early stopping uses `obj.evals_since_improvement` (or custom logic)
 - [ ] Loop terminates on `obj.budget_exceeded`

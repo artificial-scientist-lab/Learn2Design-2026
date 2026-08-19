@@ -2,7 +2,7 @@
 
 `Objective` is the central class of the benchmark. It wraps a `ContinuousProblem` and acts as the only interface between an optimization algorithm and the underlying physics simulation. Every function evaluation, gradient computation, and random sample goes through `Objective`, which transparently records everything needed for reproducible benchmarking.
 
-For rare cases that need a raw JAX-compatible callable inside a custom JIT loop, use `Objective.value_function(...)` and then record completed evaluations with `Objective.log_evaluation(...)`.
+For rare cases that need a raw JAX-compatible callable inside a custom JIT loop, start logging, use `Objective.value_function(...)`, and then record completed evaluations with `Objective.log_evaluation(...)`.
 
 **Import:**
 
@@ -278,12 +278,13 @@ loss = obj(params)   # equivalent to obj.value(params)
 ### Unlogged raw value function
 
 ```python
+obj.start_logging()
 value_fn = obj.value_function()                 # follows obj.unbounded
 value_fn = obj.value_function(unbounded=True)   # force unbounded mapping
 value_fn = obj.value_function(unbounded=False)  # bounded problem objective
 ```
 
-`value_function(unbounded=None)` returns a JAX-compatible scalar callable without logging, timing, or budget accounting. It exists for optimizers that must call the value function inside their own JIT-compiled loop, such as Optax L-BFGS line search.
+`value_function(unbounded=None)` returns a JAX-compatible scalar callable that does not itself log or increment the evaluation counter. It exists for optimizers that must call the value function inside their own JIT-compiled loop, such as Optax L-BFGS line search. The getter raises `RuntimeError` before `start_logging()`, so building and compiling a custom evaluation loop is inside the timed lifecycle.
 
 When `unbounded=True`, the returned callable maps unbounded parameters into the problem bounds using the Objective's active mapping, then calls `problem.objective_function`. When `unbounded=False`, it calls `problem.objective_function` directly. Passing `None` uses the Objective's current `obj.unbounded` mode.
 
@@ -292,6 +293,7 @@ Because this callable is intentionally unlogged, pair it with `obj.log_evaluatio
 ### Unlogged raw value-and-aux function
 
 ```python
+obj.start_logging()
 aux_value_fn = obj.value_function_aux()  # follows obj.unbounded
 if aux_value_fn is None:
     raise RuntimeError("this problem has no aux objective")
@@ -299,13 +301,12 @@ if aux_value_fn is None:
 value_and_grad_aux_fn = jax.jit(
     jax.value_and_grad(aux_value_fn, has_aux=True)
 )
-_ = value_and_grad_aux_fn(params)  # JIT warmup before timing
-obj.start_logging()
+_ = value_and_grad_aux_fn(params)  # custom JIT compilation is timed
 (loss, aux), grad = value_and_grad_aux_fn(params)
 obj.log_evaluation(params=params, loss=loss, grad=grad, aux=aux)
 ```
 
-`value_function_aux(unbounded=None)` is the mapped, JAX-compatible counterpart to `value_function()`. It returns an unlogged callable whose invocation yields `(loss, aux)`, follows the same `unbounded` argument semantics, and returns `None` when the problem does not expose `objective_function_aux`. This is the safe way for a custom JIT loop to obtain aux without bypassing the Objective's space mapping. `log_evaluation` persists only fields selected by aux save tokens.
+`value_function_aux(unbounded=None)` is the mapped, JAX-compatible counterpart to `value_function()`. After logging starts, it returns an unlogged callable whose invocation yields `(loss, aux)`, follows the same `unbounded` argument semantics, and returns `None` when the problem does not expose `objective_function_aux`. Before logging starts, the getter raises `RuntimeError`. This is the safe way for a custom JIT loop to obtain aux without bypassing the Objective's space mapping. `log_evaluation` persists only fields selected by aux save tokens.
 
 ### Manual logging
 
@@ -313,7 +314,7 @@ obj.log_evaluation(params=params, loss=loss, grad=grad, aux=aux)
 obj.log_evaluation(params=..., loss=..., grad=..., hessian=..., aux=...)
 ```
 
-For algorithms with custom JIT-compiled evaluation loops that use `obj.value_function(...)` or `obj.value_function_aux(...)` instead of calling `obj.value()` directly. Accepts `params`, `loss`, `grad`, `hessian`, and optional `aux` results and performs the same history recording. Supplied aux is persisted only for matching save tokens. In an aux-enabled run, omitting `aux` records `None` in each selected aux history; manual logging never manufactures aux diagnostics.
+For algorithms with custom JIT-compiled evaluation loops that use `obj.value_function(...)` or `obj.value_function_aux(...)` instead of calling `obj.value()` directly. Accepts `params`, `loss`, `grad`, `hessian`, and optional `aux` results and performs the same history recording. It raises `RuntimeError` before `start_logging()`. Supplied aux is persisted only for matching save tokens. In an aux-enabled run, omitting `aux` records `None` in each selected aux history. Manual logging never manufactures aux diagnostics.
 
 ---
 
@@ -321,7 +322,7 @@ For algorithms with custom JIT-compiled evaluation loops that use `obj.value_fun
 
 ### `start_logging()`
 
-Starts Objective logging and the wall-clock timer. **Must be called after JIT warmup and before the optimization loop.** All `time_steps` and budget checks are relative to this moment.
+Starts Objective logging and the wall-clock timer. **Call it after Objective-provided JIT warmup and before any evaluation or raw callable getter.** All `time_steps` and budget checks are relative to this moment. Calling it twice for the same run raises `RuntimeError`. Call `reset()` first to begin a new run.
 
 ```python
 # Typical sequence
@@ -349,6 +350,12 @@ obj.warmup_vmap_value_grad_and_hessian(batch_size=10)
 ```
 
 Each helper executes the matching path **twice** on deterministic parameters and must be called before `start_logging()`. The batched variants accept a `batch_size` argument to match the batch size used during optimisation.
+
+Before `start_logging()`, result-producing methods (`value*`, `grad`, `hessian`,
+and `vmap_*`), raw callable getters (`value_function*`), and
+`log_evaluation()` raise `RuntimeError`. Configuration and context remain
+available: bounds, dimension, problem spec, optimization pairs, budget values,
+random parameter generation, and pre-run setters do not require logging.
 
 ### `reset()`
 
@@ -465,7 +472,9 @@ bounded ≈ lb + (ub - lb) * forward(random_params_unbounded(...))
 |----------|------|-------------|
 | `bounds` | `Array[2, n_params]` | Lower and upper parameter bounds (or $\pm\infty$ when unbounded). |
 | `n_params` | `int` | Number of optimizable parameters. |
+| `optimization_pairs` | `list` | Defensive-copy component/property context aligned by parameter index: `optimization_pairs[i]` describes parameter `i`. Usually a `(component_name, property_name)` tuple. Coupled parameters may contain a list of tuples. |
 | `problem_name` | `str` | Display name of the wrapped problem. |
+| `problem_spec` | `dict[str, Any]` | Fresh JSON-safe typed spec (`type`, `version`, `params`) sufficient to reconstruct the wrapped problem. Contains problem configuration, not run results. |
 | `penalty_fn` | `Callable \| None` | The wrapped problem's penalty function, or `None` if the problem does not expose one. Update it via `set_penalty_fn(fn)`. |
 | `power_thresholds` | `dict[str, float] \| None` | Per-group power thresholds (`hard`, `soft`, `detector`) for problems that opt into the penalty contract, or `None`. Constants; do not change across evaluations. |
 

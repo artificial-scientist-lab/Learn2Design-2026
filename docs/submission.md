@@ -56,8 +56,8 @@ to be valid.
 ## Time budget
 
 Official budget per topology: exactly 4 hours of wall-clock time after
-`objective.start_logging()`. JIT warmup before `objective.start_logging()` does
-not count.
+`objective.start_logging()`. Objective-provided JIT warmup before
+`objective.start_logging()` does not count.
 
 The full per-topology container runtime is capped at 4 h 30 min from the start
 of the participant run. This includes any work before `objective.start_logging()`
@@ -72,14 +72,18 @@ Concretely:
 - Once the 4-hour wall-clock budget is exhausted, `objective.budget_exceeded`
   becomes `True`. Further calls to `objective.value` return immediately
   without re-evaluating; the best feasible loss found so far is what counts.
-- JIT compilation time from warmup calls before `objective.start_logging()` is
-  **not** counted against the 4 hours.
-- Before calling `objective.start_logging()`, submissions may only perform setup
-  that is independent of the specific evaluation problem instance. They must not
-  use the provided `Objective`, its wrapped problem, topology, bounds, random
-  samples, losses, gradients, auxiliary diagnostics, or any derived information
-  to select, rank, train, adapt, filter, or otherwise improve candidate
-  solutions before logging starts.
+- JIT compilation time from Objective-provided `warmup_*()` calls before
+  `objective.start_logging()` is not counted against the 4 hours.
+- Before calling `objective.start_logging()`, submissions may inspect documented
+  public context such as `bounds`, `n_params`, `problem_name`, `problem_spec`,
+  and `optimization_pairs`. They may generate random parameters, inspect budget
+  configuration, use public pre-run setters, initialize candidates or models
+  from that context, and call Objective-provided `warmup_*()` methods.
+- Result-producing evaluation methods, raw callable getters such as
+  `value_function()`, and `log_evaluation()` are unavailable before logging and
+  raise `RuntimeError`. Compiling a custom raw-callable evaluation path therefore
+  counts against the 4-hour budget. Accessing private internals or the wrapped
+  problem to bypass this lifecycle is forbidden.
 
 ---
 
@@ -132,7 +136,7 @@ used. Prize money is withheld until review is complete.
 ## Disqualification criteria
 
 - Encoding knowledge of private topology specifications in any form.
-- Using information from the provided evaluation `Objective` or problem instance
-  to improve candidate solutions before `objective.start_logging()`.
+- Bypassing the `Objective` limitations to evaluate, obtain raw evaluation
+  callables early, or record results before `objective.start_logging()`.
 - Submitting work that is not your own without attribution.
 - Violations of the [Code of Conduct](../CODE_OF_CONDUCT.md).

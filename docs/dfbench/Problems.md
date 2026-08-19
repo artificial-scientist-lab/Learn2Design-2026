@@ -30,7 +30,7 @@ Defines the minimal interface every problem must implement:
 | `name` | `str` | Human-readable identifier. |
 | `objective_function` | `Callable` | Loss in bounded parameter space. |
 | `bounds` | `Array[2, n_params]` | `[lower_bounds, upper_bounds]` for each parameter. |
-| `optimization_pairs` | `list[tuple[str, str]]` | `(component_name, property_name)` tuples mapping each parameter index to a Differometor component. |
+| `optimization_pairs` | `list` | Component/property context aligned by parameter index. Entries are normally `(component_name, property_name)` tuples. A coupled parameter can use a list of tuples. |
 | `n_params` | `int` | Number of parameters = `len(optimization_pairs)`. |
 | `to_spec() -> dict` | `dict` | Reconstructive spec: a small, JSON-serialisable dict sufficient to rebuild an equivalent problem instance (see [Reconstruction & Problem Spec](#reconstruction--problem-spec) below). |
 
@@ -316,7 +316,8 @@ Starting with dfbench 0.1.1, the raw `to_spec()` dict is wrapped in a typed `Pro
 2. The `@register_problem` decorator registers the class in a module-level registry under its `__name__` (or a custom `spec_type`).
 3. `ContinuousProblem.to_problem_spec()` wraps the `to_spec()` dict into a typed `ProblemSpec` container. Subclasses rarely need to override this; the default implementation is sufficient as long as `to_spec()` is correct.
 4. `build_problem_from_spec(spec)` accepts either a `ProblemSpec` or a raw dict (typed container or legacy flat form; both are normalized via `ProblemSpec.from_dict`) and reconstructs the instance.
-5. `Objective._build_metadata()` calls `problem.to_problem_spec()` and stores the resulting dict in `RunMetadata.extra["problem_spec"]`, so every checkpoint records its originating problem.
+5. `Objective.problem_spec` exposes the same typed-container dict directly, without requiring a checkpoint.
+6. `Objective._build_metadata()` stores that problem spec in `RunMetadata.extra["problem_spec"]`, so every checkpoint records its originating problem.
 
 ```python
 from dfbench.core.problem import ProblemSpec, build_problem_from_spec
@@ -328,6 +329,9 @@ ps = problem.to_problem_spec()
 # JSON-safe dict for embedding in checkpoint metadata
 spec_dict = ps.to_dict()
 # {"type": "VoyagerProblem", "version": 1, "params": {"n_frequencies": 50, ...}}
+
+# The Objective exposes this same dict directly
+spec_dict = obj.problem_spec
 
 # Rebuild an equivalent problem later, in any process
 problem2 = build_problem_from_spec(ps)

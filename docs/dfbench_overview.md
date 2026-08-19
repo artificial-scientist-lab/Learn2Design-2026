@@ -33,6 +33,11 @@ A quick summary of the methods you'll touch most often. Data logging is done aut
 | `objective.set_seed(seed)` | Seed the internal PRNG for reproducible `random_params*` draws. |
 | `objective.set_penalty_fn(fn)` | Swap the penalty function on constrained problems (`UIFOProblem`, …); retraces JIT paths. Use `relu_penalty`, `zero_penalty`, etc. |
 
+Before `start_logging()`, the Objective allows its `warmup_*()` methods,
+documented problem context, random parameter generation, budget inspection, and
+pre-run setters. Result-producing evaluation methods, raw callable getters, and
+`log_evaluation()` raise `RuntimeError` until logging starts.
+
 ### Evaluation (aux — constrained problems only)
 
 | Method | Purpose |
@@ -77,7 +82,9 @@ A quick summary of the methods you'll touch most often. Data logging is done aut
 |---|---|
 | `objective.bounds` | Per-parameter `(low, high)` arrays (`±inf` when unbounded). |
 | `objective.n_params` | Number of optimizable parameters. |
+| `objective.optimization_pairs` | Component/property context aligned with parameter indices. Coupled parameters may map to several pairs. |
 | `objective.problem` | The wrapped `ContinuousProblem`. |
+| `objective.problem_spec` | Fresh JSON-safe problem configuration with `type`, `version`, and `params`. It contains no run results. |
 | `objective.penalty_fn` | Active penalty callable (or `None`). |
 | `objective.power_thresholds` | Per-group physical thresholds `{hard, soft, detector}` for constrained problems, or `None`. |
 
@@ -85,8 +92,8 @@ A quick summary of the methods you'll touch most often. Data logging is done aut
 
 | Method | Purpose |
 |---|---|
-| `objective.value_function(unbounded=None)` | Unlogged pure JAX callable for use inside your own JIT loop. |
-| `objective.log_evaluation(params=…, loss=…, grad=…, hessian=…)` | Manually record a completed step when using `value_function()`. |
+| `objective.value_function(unbounded=None)` | Unlogged pure JAX callable for use inside your own JIT loop. Requires active logging, so custom compilation is timed. |
+| `objective.log_evaluation(params=…, loss=…, grad=…, hessian=…)` | Manually record a completed step when using `value_function()`. Requires active logging. |
 
 ### Persistence
 

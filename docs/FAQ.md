@@ -42,6 +42,12 @@ The execution of `objective.value(params)` or `objective.value_and_grad(params)`
 ### How long does it take to JIT-compile the objective function?
 The warmup time for the objective function (or gradient variants) takes around 2 minutes on our cluster setup of NVIDIA A100 GPU + AMD EPYC 7302 CPU. Because compilation is expensive, we provide `warmup_*()` methods (e.g., `objective.warmup_value()`) so you can compile the functions for free before the official evaluation clock starts via `objective.start_logging()`.
 
+Before logging, you may also inspect documented context such as bounds,
+dimension, `problem_spec`, and `optimization_pairs`, generate random parameters,
+and use public pre-run setters. Result-producing methods, raw callable getters,
+and `log_evaluation()` raise `RuntimeError` until `start_logging()` has run.
+Custom raw-callable compilation is therefore timed.
+
 ---
 
 ## Getting Started & Submissions

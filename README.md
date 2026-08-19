@@ -145,6 +145,12 @@ class MyAlgorithm(OptimizationAlgorithm):
             loss = objective.value(params)  # automatically logged
 ```
 
+With `dfbench 0.3.3`, result-producing evaluation methods, raw callable getters,
+and `log_evaluation()` require `start_logging()` first. Documented problem
+context such as bounds, dimension, `problem_spec`, and `optimization_pairs`, as
+well as random sampling, pre-run setters, and Objective-provided `warmup_*()`
+methods, remain available before logging.
+
 That is the entire algorithm contract. The `Objective` handles seeding, history,
 checkpointing, and budget enforcement. You write the loop, place the class in
 `submission.py`, and package it as described in [Submitting](#submitting).
@@ -216,7 +222,7 @@ Via uv:
 uv sync --extra cuda13
 ```
 
-This pulls in [`dfbench`](https://github.com/artificial-scientist-lab/Differometor-Benchmark) (v0.3.2, the benchmark
+This pulls in [`dfbench`](https://github.com/artificial-scientist-lab/Differometor-Benchmark) (v0.3.3, the benchmark
 framework). `dfbench` in turn uses
 [`differometor`](https://github.com/artificial-scientist-lab/Differometor), the JAX-based
 interferometer simulator.
@@ -309,7 +315,7 @@ docs/
 ├── submission.md        # Submission rules
 ├── scoring.md           # Scoring and leaderboard details
 ├── FAQ.md               # Competition FAQ
-└── dfbench/             # dfbench 0.3.1 reference pages
+└── dfbench/             # dfbench 0.3.3 reference pages
     ├── Architecture-Overview.md
     ├── Objective-API-Reference.md
     ├── Problems.md
