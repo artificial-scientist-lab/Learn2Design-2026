@@ -415,6 +415,11 @@ policy, time budget, and evaluation procedure.
 | 15.10.2026, AoE | Final submission deadline |
 | Before workshop | Private leaderboard announced |
 
+The first three submission deadlines (**26 August 2026**, **12 September 2026**, and **29 September 2026**) are used only for the **public leaderboard**. These evaluations allow you to see how well your solution performs before the final submission deadline. Participation in these intermediate evaluations is **optional**. You do not need to submit a solution by any of these three deadlines to remain eligible for a prize.
+
+The competition winners will be determined **only based on submissions received by the final deadline: 15 October 2026, Anywhere on Earth (AoE)**. In other words, even if your **first and only submission is on 15 October 2026**, you are still fully eligible to win the competition and receive a prize.
+
+
 ## Contact
 
 Whenever possible, we recommend communicating with the organizers via GitHub issues so that other participants with similar questions can also see the solutions. If your question cannot be discussed publicly, please contact [Jonathan](mailto:jonathan@feyer.ai), [Laurin](mailto:laurin.sefa@student.uni-tuebingen.de), [Priya](mailto:shanmugapriya.kanagasabapathi@uni-tuebingen.de), [Soham](mailto:soham.basu@uni-tuebingen.de), or [Mario](mailto:mario.krenn@uni-tuebingen.de).
