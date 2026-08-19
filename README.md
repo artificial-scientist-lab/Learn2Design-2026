@@ -417,7 +417,7 @@ policy, time budget, and evaluation procedure.
 
 ## Contact
 
-Whenever possible, we recommend communicating with the organizers via GitHub issues so that other participants with similar questions can also see the solutions. If your question cannot be discussed publicly, please contact [Jonathan](mailto:jonathan@feyer.ai), [Laurin](laurin.sefa@student.uni-tuebingen.de), [Priya](mailto:shanmugapriya.kanagasabapathi@uni-tuebingen.de), [Soham](mailto:soham.basu@uni-tuebingen.de), or [Mario](mailto:mario.krenn@uni-tuebingen.de).
+Whenever possible, we recommend communicating with the organizers via GitHub issues so that other participants with similar questions can also see the solutions. If your question cannot be discussed publicly, please contact [Jonathan](mailto:jonathan@feyer.ai), [Laurin](mailto:laurin.sefa@student.uni-tuebingen.de), [Priya](mailto:shanmugapriya.kanagasabapathi@uni-tuebingen.de), [Soham](mailto:soham.basu@uni-tuebingen.de), or [Mario](mailto:mario.krenn@uni-tuebingen.de).
 
 ## Resources
 
