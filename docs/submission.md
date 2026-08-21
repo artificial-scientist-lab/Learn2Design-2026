@@ -53,6 +53,18 @@ to be valid.
 
 ---
 
+## Evaluation hardware
+
+Each participant run is allocated:
+
+- 1× NVIDIA H100 SXM5 GPU (Hopper, 80 GB HBM3)
+- 16 vCPUs on an Intel Xeon Platinum 8468 host
+- 200 GiB RAM
+- 40 GiB SSD
+- Ubuntu 22.04 LTS with CUDA 12
+
+---
+
 ## Time budget
 
 Official budget per topology: exactly 4 hours of wall-clock time after
@@ -96,7 +108,7 @@ Your submission may import any pip-installable Python package, with one exceptio
   are handed.
 
 The evaluation environment ships with a common base (`dfbench`, `differometor`,
-`jax`, `jaxlib` CUDA 13, `numpy`, `scipy`, `optax`, `cma`, `cmaes`, `torch`,
+`jax`, `jaxlib` CUDA 12, `numpy`, `scipy`, `optax`, `cma`, `cmaes`, `torch`,
 `botorch`, `nevergrad`, `evosax`). The evaluator installs the packages listed in
 the mandatory root-level `requirements.txt` before running your algorithm.
 

@@ -5,6 +5,9 @@
 [![GitHub](https://img.shields.io/badge/GitHub-dfbench-3232c8?logo=github&logoColor=white)](https://github.com/artificial-scientist-lab/Differometor-Benchmark)
 [![Static Badge](https://img.shields.io/badge/Codabench-Submit-4CB2AD)](https://submit.learn2design2026.com/competitions/4/)
 
+> [!IMPORTANT]
+> **Evaluation hardware update:** Official runs now use an NVIDIA H100 VM with 80 GB GPU memory, 16 vCPUs, and 200 GiB RAM. See the [evaluation hardware specification](docs/submission.md#evaluation-hardware).
+
 
 ## A physics experiment design competition for gravitational-wave detectors
 
@@ -43,7 +46,7 @@ Algorithms will be ranked by their hidden-evaluation performance, with **EUR 25,
 Beyond gravitational-wave detection, Learn2Design-2026 asks a broader scientific question:
 **Can AI systems discover scientific instruments that go beyond human intuition while remaining physically meaningful and experimentally constrained?**
 
-More Infos in the accepted proposal for [Learn2Design-2026](Learn2Design_details.pdf).
+More information is available in the accepted proposal for [Learn2Design-2026](Learn2Design_details.pdf). Its original hardware figures are historical and are superseded by the [current evaluation specification](docs/submission.md#evaluation-hardware).
 
 ## Prize money
 
@@ -93,7 +96,7 @@ as the starting point for describing each team's method in this joint analysis.
 - You submit a ZIP archive containing your optimization algorithm, dependency
   requirements, and any supporting files through the [submission portal](https://submit.learn2design2026.com/).
 - You can submit as often as you want; for each monthly evaluation we use the last submission before that month's deadline.
-- Each evaluation runs it on 10 new held-out hidden topologies on a single A100 GPU with an AMD EPYC 7302 CPU.
+- Each evaluation runs it on 10 new held-out hidden topologies using the [standard H100 evaluation VM](docs/submission.md#evaluation-hardware).
 - Time budget per topology: exactly 4 hours of wall-clock time after `objective.start_logging()`.
 - The best loss among setups [satisfying all constraints](docs/dfbench_overview.md#power-constraints-and-aux-diagnostics) will be recorded for each of the 10 runs.
 - If a run has no constraint-satisfying setup, we use the best constraint-satisfying loss from random search on that topology instead.
@@ -351,6 +354,10 @@ The table below summarizes the example baselines included in [`learn2design/exam
 
 Rows are ordered by displayed mean loss; ties in the rounded values are broken
 by displayed SEM and then alphabetically.
+
+**Benchmark hardware for all results below:** 1× NVIDIA A100 GPU (40 GB VRAM),
+AMD EPYC 7302 CPU, and 50 GB RAM. This is the original baseline setup, not the
+[current H100 evaluation VM](docs/submission.md#evaluation-hardware).
 
 Because this repository depends on `dfbench` as an external package, it does
 not contain the `dfbench` source tree itself. The links below therefore open

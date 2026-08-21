@@ -62,7 +62,7 @@ Extends `ContinuousProblem` with optics-specific functionality shared by all Dif
 | Setup | LIGO Voyager with balanced homodyne detection |
 | Parameters | ~25 (reflectivities, tunings, squeezing, power, masses, lengths, phases) |
 | Noise model | Single quantum noise source |
-| Speed | ~12 ms/eval on A100 GPU |
+| Speed | Hardware-dependent; benchmark locally |
 | Difficulty | Moderate: loss < 0 achievable without physical constraints |
 
 ```python
@@ -116,7 +116,7 @@ Each parameter corresponds to a `(component, property)` pair from the Voyager se
 | Setup | LIGO Voyager with balanced homodyne detection |
 | Parameters | 6 (tuning only: `prm`, `itmy`, `etmy`, `itmx`, `etmx`, `srm`) |
 | Noise model | Single quantum noise source |
-| Speed | ~12 ms/eval on A100 GPU |
+| Speed | Hardware-dependent; benchmark locally |
 | Difficulty | Moderate: lower-dimensional than `VoyagerProblem`, useful for quick prototyping |
 
 ```python
@@ -161,7 +161,7 @@ All optimized parameters are mirror tuning angles in degrees:
 | Parameters | ~25 (same as `VoyagerProblem`) |
 | Noise model | Three sources: quantum, amplitude, frequency noise |
 | Constraints | Power thresholds on mirrors, beamsplitters, and detectors |
-| Speed | ~25 ms/eval on A100 GPU |
+| Speed | Hardware-dependent; benchmark locally |
 | Difficulty | Hard: loss < 0 is very difficult to achieve |
 
 ```python
@@ -241,7 +241,7 @@ The `Objective` wraps this with `value_aux`, `value_and_grad_aux`, `vmap_value_a
 | Parameters | 50-250+ depending on grid size |
 | Noise model | Three sources (same as constrained Voyager) |
 | Constraints | Power thresholds (same as constrained Voyager) |
-| Speed | ~500 ms/eval on A100 GPU |
+| Speed | Hardware-dependent; benchmark locally |
 | Difficulty | Hard but achievable: the UIFO is overparameterized |
 
 ```python

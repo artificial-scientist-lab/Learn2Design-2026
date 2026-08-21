@@ -37,10 +37,10 @@ There are two ways besides the `topology_seed` to set the UIFO topology when ini
 2. **`centers` + `boundaries` dictionaries:** Explicit component placement using coordinate dictionaries that match Differometor's native format (e.g., `centers={"11": ("beamsplitter", "left")}, boundaries={"01": "squeezer"}`). Refer to the [Differometor documentation](https://github.com/artificial-scientist-lab/Differometor/blob/6aa8592e4e7c9c48ff925e423aae5649185f4e88/differometor/setups.py#L752) for the exact format.
 
 ### How long does the objective function evaluation take?
-The execution of `objective.value(params)` or `objective.value_and_grad(params)` takes on the order of 0.5 seconds on our cluster setup of NVIDIA A100 GPU + AMD EPYC 7302 CPU for the UIFO problem.
+Runtime depends on the topology, batching strategy, and implementation. Official evaluations use the [standard H100 evaluation VM](submission.md#evaluation-hardware); benchmark representative UIFO topologies locally and plan against the official wall-clock budget.
 
 ### How long does it take to JIT-compile the objective function?
-The warmup time for the objective function (or gradient variants) takes around 2 minutes on our cluster setup of NVIDIA A100 GPU + AMD EPYC 7302 CPU. Because compilation is expensive, we provide `warmup_*()` methods (e.g., `objective.warmup_value()`) so you can compile the functions for free before the official evaluation clock starts via `objective.start_logging()`.
+JIT compilation can take several minutes and varies with the compiled function. Because compilation is expensive, we provide `warmup_*()` methods (e.g., `objective.warmup_value()`) so you can compile the functions for free before the official evaluation clock starts via `objective.start_logging()`.
 
 Before logging, you may also inspect documented context such as bounds,
 dimension, `problem_spec`, and `optimization_pairs`, generate random parameters,

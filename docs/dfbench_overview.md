@@ -244,9 +244,9 @@ A note on the grid: horizontal and vertical inter-cell spaces at the same grid p
 
 ## What to train/test your algorithm on?
 
-The problem you are scored on is `UIFOProblem` which has ~200 parameters (depending on topology). Each evaluation uses 10 new hidden topologies. Official budget per topology is exactly 4 hours of wall-clock time after `objective.start_logging()`. On an A100 a single evaluation takes roughly 500 ms once JIT is warm.
+The problem you are scored on is `UIFOProblem` which has ~200 parameters (depending on topology). Each evaluation uses 10 new hidden topologies. Official budget per topology is exactly 4 hours of wall-clock time after `objective.start_logging()`. Runtime depends on the topology and batching strategy; official runs use the [standard H100 evaluation VM](submission.md#evaluation-hardware).
 
-For development there is a smaller problem that uses the same loss computation: `ConstrainedVoyagerProblem`. It is the aLIGO Voyager design, roughly 25 components, and it uses the same three noise sources and the same power-constraint penalty (i.e. the same loss function) as the UIFO. There are just fewer components. It takes roughly 20x less time per evaluation than the UIFO on the same hardware (around 25 ms/eval on an A100). You can use it to speed up the evaluation loop and get a better feel for your algorithm.
+For development there is a smaller problem that uses the same loss computation: `ConstrainedVoyagerProblem`. It is the aLIGO Voyager design, roughly 25 components, and it uses the same three noise sources and the same power-constraint penalty (i.e. the same loss function) as the UIFO. There are just fewer components, so it is much faster to evaluate and can help you iterate on your algorithm before benchmarking representative UIFO topologies.
 
 ![Voyager layout](../media/voyager.png)
 
