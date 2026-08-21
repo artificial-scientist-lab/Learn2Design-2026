@@ -38,7 +38,8 @@ unreleased methods private until the organizers evaluate them, which reduces
 copying between participants.
 
 You may submit as often as you want. For each monthly evaluation, the organizers
-evaluate the last submission received before that month's deadline.
+evaluate only the last submission received before that month's deadline. Earlier
+submissions are not evaluated or scored.
 
 ---
 
