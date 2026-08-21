@@ -88,6 +88,19 @@ Inspect one saved setup:
 python dataset/examples/load_entry.py --index 0
 ```
 
+To see where every value in `bounded_params` is applied, include the parameter
+map:
+
+```bash
+python dataset/examples/load_entry.py --index 0 --show-parameter-map
+```
+
+The map prints each array index with its `component.property` target and saved
+value. A bracketed group means that one parameter is shared by several targets.
+This map is also the authoritative way to locate parameters for components that
+are intentionally hidden from the diagram, such as free masses, and therefore
+cannot be inspected by hovering over the visualization.
+
 Evaluate one saved setup with the competition [`UIFOProblem`](../docs/dfbench/Problems.md#uifoproblem):
 
 ```bash
@@ -102,7 +115,23 @@ python dataset/examples/visualize_entry.py --index 0
 
 By default this writes an interactive HTML file under
 `dataset/examples/visualizations/` and uses the saved power data to scale beam
-widths in the diagram.
+widths in the diagram. The diagram follows the topology string's row-major
+layout: `center11` is at the top left, columns run from left to right, and rows
+run from top to bottom. This prevents Differometor's detector-based
+autorotation from making the diagram appear flipped relative to the topology
+definition.
+
+The final orientation can be selected explicitly:
+
+```bash
+python dataset/examples/visualize_entry.py --index 0 --layout-orientation topology
+python dataset/examples/visualize_entry.py --index 0 --layout-orientation detector-right
+python dataset/examples/visualize_entry.py --index 0 --layout-orientation native
+```
+
+`topology` is the default. `detector-right` restores Differometor's original
+autorotation, while `native` leaves the graph placement unrotated. The example
+supports these modes with both Differometor 0.0.5 and 0.0.6.
 
 All entry examples can also select by hash:
 

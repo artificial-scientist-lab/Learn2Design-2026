@@ -10,6 +10,15 @@ import numpy as np
 
 
 DATASET_PATH = Path(__file__).resolve().parents[1] / "dataset.h5"
+UIFO_OPTIMIZED_PROPERTIES = (
+    "reflectivity",
+    "tuning",
+    "db",
+    "angle",
+    "power",
+    "mass",
+    "length",
+)
 
 
 def decode_h5_string(value: Any) -> str:
@@ -78,3 +87,25 @@ def load_power_data(handle: h5py.File, entry: np.void) -> tuple[np.ndarray, list
     names = [decode_h5_string(value) for value in handle["power_port_map_names"][map_start:map_stop]]
     indices = handle["power_port_map_indices"][map_start:map_stop]
     return values, names, indices
+
+
+def reconstruct_uifo_setup(topology_string: str, size: int, *, mode: str = "space_modulation"):
+    """Rebuild a dataset UIFO and its parameter-index mapping without the full objective."""
+    from dfbench.problems.uifo import topology_from_string
+    from differometor.setups import constrain_inter_grid_cell_spaces, uifo
+
+    centers, boundaries = topology_from_string(topology_string, size)
+    # Dataset topologies specify every cell, so random=True matches UIFOProblem
+    # construction without changing the decoded centers or boundaries.
+    setup, _ = uifo(
+        size=size,
+        mode=mode,
+        random=True,
+        centers=centers,
+        boundaries=boundaries,
+    )
+    optimization_pairs = constrain_inter_grid_cell_spaces(
+        setup.parameters,
+        UIFO_OPTIMIZED_PROPERTIES,
+    )
+    return setup, optimization_pairs
