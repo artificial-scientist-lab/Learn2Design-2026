@@ -26,3 +26,7 @@ notebooks/
 data/
 checkpoints/
 *.pt
+
+# Organizer-only submission evaluation tooling
+/tools/submission_evaluation/
+/tests/test_submission_evaluation.py

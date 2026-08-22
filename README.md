@@ -215,7 +215,8 @@ cd Learn2Design-2026
 pip install -e .
 ```
 
-If you want GPU support, make sure you have CUDA 12 or 13 installed:
+For GPU support matching the official evaluation environment, use CUDA 13.
+CUDA 12 remains available as an optional local-development extra:
 ```bash
 pip install -e ".[cuda13]" # or ".[cuda12]"
 ```
