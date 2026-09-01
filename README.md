@@ -5,10 +5,6 @@
 [![GitHub](https://img.shields.io/badge/GitHub-dfbench-3232c8?logo=github&logoColor=white)](https://github.com/artificial-scientist-lab/Differometor-Benchmark)
 [![Static Badge](https://img.shields.io/badge/Codabench-Submit-4CB2AD)](https://submit.learn2design2026.com/competitions/4/)
 
-> [!IMPORTANT]
-> **Evaluation hardware update:** Official runs now use an NVIDIA H100 VM with 80 GB GPU memory, 16 vCPUs, and 200 GiB RAM. See the [evaluation hardware specification](docs/submission.md#evaluation-hardware).
-
-
 ## A physics experiment design competition for gravitational-wave detectors
 
 <p align="center">

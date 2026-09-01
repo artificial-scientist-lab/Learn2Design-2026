@@ -60,7 +60,7 @@ Each participant run is allocated:
 
 - 1× NVIDIA H100 SXM5 GPU (Hopper, 80 GB HBM3)
 - 16 vCPUs on an Intel Xeon Platinum 8468 host
-- 200 GiB RAM
+- 128 GiB RAM
 - 40 GiB SSD
 - Ubuntu 22.04 LTS with CUDA 13
 
