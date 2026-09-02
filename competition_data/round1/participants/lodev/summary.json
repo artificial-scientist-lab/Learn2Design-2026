@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56306.6,
+  "mean_evaluations_per_second": 3.910153476083701,
+  "mean_feasible_fraction": 0.6255174980352042,
+  "mean_time_to_best_minutes": 208.43339716712634,
+  "participant_id": "lodev",
+  "rank": 25,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 2.5301773432288175,
+    "mean": 0.6184402200945565,
+    "median": 0.41899817167777154,
+    "minimum": 0.16800138824996871,
+    "run_count": 10,
+    "sem": 0.21583262111513662,
+    "std": 0.6825226760879827
+  },
+  "time_to_best_run_count": 10
+}

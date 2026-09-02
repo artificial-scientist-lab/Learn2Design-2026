@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 160539.0,
+  "mean_evaluations_per_second": 11.38982446041944,
+  "mean_feasible_fraction": 0.45189164819345173,
+  "mean_time_to_best_minutes": 150.91254886110625,
+  "participant_id": "kratos_",
+  "rank": 42,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 4.972167695008347,
+    "mean": 4.69383937365864,
+    "median": 4.6930899051349035,
+    "minimum": 4.532265891509029,
+    "run_count": 10,
+    "sem": 0.04139394426595429,
+    "std": 0.13089914521848223
+  },
+  "time_to_best_run_count": 10
+}

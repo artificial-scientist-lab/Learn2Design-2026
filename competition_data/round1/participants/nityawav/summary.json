@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56475.3,
+  "mean_evaluations_per_second": 3.9218679096647833,
+  "mean_feasible_fraction": 0.6816142079398266,
+  "mean_time_to_best_minutes": 162.072472508351,
+  "participant_id": "nityawav",
+  "rank": 33,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 3.7150630567549467,
+    "mean": 0.9767081348443345,
+    "median": 0.45511444466060247,
+    "minimum": 0.3163009862226942,
+    "run_count": 10,
+    "sem": 0.35253632904070914,
+    "std": 1.1148177577232037
+  },
+  "time_to_best_run_count": 10
+}

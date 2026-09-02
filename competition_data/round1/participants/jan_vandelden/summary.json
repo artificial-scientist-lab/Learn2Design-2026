@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 133534.4,
+  "mean_evaluations_per_second": 9.27310980590968,
+  "mean_feasible_fraction": 0.8027137004362193,
+  "mean_time_to_best_minutes": 187.14081477165223,
+  "participant_id": "jan_vandelden",
+  "rank": 8,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.47962155514001603,
+    "mean": 0.33013045865750174,
+    "median": 0.3920175792954722,
+    "minimum": -0.2291539580382926,
+    "run_count": 10,
+    "sem": 0.06387748936800951,
+    "std": 0.20199835761609966
+  },
+  "time_to_best_run_count": 10
+}

@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56433.1,
+  "mean_evaluations_per_second": 3.9189205879867215,
+  "mean_feasible_fraction": 0.8421286205395841,
+  "mean_time_to_best_minutes": 164.76743617892265,
+  "participant_id": "s_boehler",
+  "rank": 31,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 3.757507436205003,
+    "mean": 0.8858373735226897,
+    "median": 0.5224160516631953,
+    "minimum": 0.4323418046996501,
+    "run_count": 10,
+    "sem": 0.3232385818898473,
+    "std": 1.0221701464147714
+  },
+  "time_to_best_run_count": 10
+}

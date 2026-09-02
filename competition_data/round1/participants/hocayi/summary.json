@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56368.7,
+  "mean_evaluations_per_second": 3.9144606385284497,
+  "mean_feasible_fraction": 0.8160124728459202,
+  "mean_time_to_best_minutes": 179.3496551167965,
+  "participant_id": "hocayi",
+  "rank": 23,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 1.3562881138303176,
+    "mean": 0.5752075426526408,
+    "median": 0.4726216918009858,
+    "minimum": 0.3188122358184475,
+    "run_count": 10,
+    "sem": 0.09325285232741568,
+    "std": 0.2948914116619675
+  },
+  "time_to_best_run_count": 10
+}

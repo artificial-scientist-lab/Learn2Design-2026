@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56363.4,
+  "mean_evaluations_per_second": 3.914098993242785,
+  "mean_feasible_fraction": 0.7435132250784909,
+  "mean_time_to_best_minutes": 188.6883247156938,
+  "participant_id": "carlometta",
+  "rank": 28,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 1.410814592277052,
+    "mean": 0.7483886608467593,
+    "median": 0.5749680586011587,
+    "minimum": 0.4504452807690318,
+    "run_count": 10,
+    "sem": 0.11103866775907542,
+    "std": 0.3511350984693831
+  },
+  "time_to_best_run_count": 10
+}

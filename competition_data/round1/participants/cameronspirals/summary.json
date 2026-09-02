@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56135.1,
+  "mean_evaluations_per_second": 3.898234465216114,
+  "mean_feasible_fraction": 0.8465535180961462,
+  "mean_time_to_best_minutes": 204.81503027598063,
+  "participant_id": "cameronspirals",
+  "rank": 34,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 4.3460735584800565,
+    "mean": 0.9831201948302872,
+    "median": 0.4776499845799195,
+    "minimum": 0.14632660652186463,
+    "run_count": 10,
+    "sem": 0.4047784640761715,
+    "std": 1.280021894265346
+  },
+  "time_to_best_run_count": 10
+}

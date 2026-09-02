@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 140135.2,
+  "mean_evaluations_per_second": 9.731270914730448,
+  "mean_feasible_fraction": 0.7088858685475271,
+  "mean_time_to_best_minutes": 79.37543571154276,
+  "participant_id": "jagarwal",
+  "rank": 1,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.38347244544922093,
+    "mean": 0.01967436953382796,
+    "median": 0.059916472477745196,
+    "minimum": -0.2614739033502797,
+    "run_count": 10,
+    "sem": 0.06278234674868478,
+    "std": 0.1985352125763108
+  },
+  "time_to_best_run_count": 10
+}

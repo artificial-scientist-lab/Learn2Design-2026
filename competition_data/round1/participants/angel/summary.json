@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56249.6,
+  "mean_evaluations_per_second": 3.90618932274946,
+  "mean_feasible_fraction": 0.7002397255321243,
+  "mean_time_to_best_minutes": 219.36924653569858,
+  "participant_id": "angel",
+  "rank": 20,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.9238272172596075,
+    "mean": 0.5601590506660379,
+    "median": 0.47663422162914093,
+    "minimum": 0.16883591226965233,
+    "run_count": 10,
+    "sem": 0.07281334633519485,
+    "std": 0.23025601847788982
+  },
+  "time_to_best_run_count": 10
+}

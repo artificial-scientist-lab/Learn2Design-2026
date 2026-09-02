@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 54646.1,
+  "mean_evaluations_per_second": 3.7948390965847354,
+  "mean_feasible_fraction": 0.7182901822523305,
+  "mean_time_to_best_minutes": 195.9350267402331,
+  "participant_id": "mindsculptor",
+  "rank": 15,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 1.0016079656639372,
+    "mean": 0.44516043409862904,
+    "median": 0.4061272726099526,
+    "minimum": 0.23936165237133275,
+    "run_count": 10,
+    "sem": 0.07111876900159914,
+    "std": 0.2248972944324324
+  },
+  "time_to_best_run_count": 10
+}

@@ -5,6 +5,12 @@
 [![GitHub](https://img.shields.io/badge/GitHub-dfbench-3232c8?logo=github&logoColor=white)](https://github.com/artificial-scientist-lab/Differometor-Benchmark)
 [![Static Badge](https://img.shields.io/badge/Codabench-Submit-4CB2AD)](https://submit.learn2design2026.com/competitions/4/)
 
+> [!IMPORTANT]
+> **Detailed Round 1 evaluation data is now available.** The new
+> [Round 1 data release](competition_data/round1/) contains outcome statistics
+> for every evaluated participant, including all ten run scores, uncertainty,
+> convergence checkpoints, efficiency, and feasibility statistics.
+
 ## A physics experiment design competition for gravitational-wave detectors
 
 <p align="center">

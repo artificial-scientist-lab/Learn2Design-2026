@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56145.0,
+  "mean_evaluations_per_second": 3.8989303933871446,
+  "mean_feasible_fraction": 0.7980437189599927,
+  "mean_time_to_best_minutes": 196.08905198256176,
+  "participant_id": "campi",
+  "rank": 10,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.7840607356064925,
+    "mean": 0.3652111764391545,
+    "median": 0.32282485476301376,
+    "minimum": -0.09385732030466276,
+    "run_count": 10,
+    "sem": 0.09134194804518052,
+    "std": 0.28884860173953514
+  },
+  "time_to_best_run_count": 10
+}

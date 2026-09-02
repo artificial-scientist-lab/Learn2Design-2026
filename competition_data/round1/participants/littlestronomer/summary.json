@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 43,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 154730.5,
+  "mean_evaluations_per_second": 10.744440421902922,
+  "mean_feasible_fraction": 0.8745849411923718,
+  "mean_time_to_best_minutes": 228.99888595263164,
+  "participant_id": "littlestronomer",
+  "rank": 7,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.4472216396100236,
+    "mean": 0.2925060060924565,
+    "median": 0.32553487964629835,
+    "minimum": 0.0027084166928728805,
+    "run_count": 10,
+    "sem": 0.048004426748256154,
+    "std": 0.15180332629519985
+  },
+  "time_to_best_run_count": 10
+}
