@@ -14,14 +14,6 @@ convergence checkpoints.
 - `seeds.csv`: the shared Round 1 topology and optimizer seed pairs.
 - `participants/<participant_id>/`: an individual report and convergence plot.
 
-## Checkpoint precision
-
-The common recorder saved parameters, loss and feasibility once every 25
-candidate evaluations. Intermediate checkpoint values are therefore reported
-as sampled upper bounds unless the exact final best is known to have occurred
-before that checkpoint. The 240-minute values are always the exact official run
-scores, including the documented random-search fallback when needed.
-
 ## Shared seeds
 
 All participants and organizer baselines used the same ten seed pairs. Round 1
