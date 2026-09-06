@@ -1,9 +1,10 @@
 """Standalone SciPy BFGS optimizer.
 
 Optimizes in the Objective's unbounded (sigmoid-space) parameterization.
-Includes an adapter that logs every evaluation through the Objective for fair budget
-accounting, plus a restart strategy (alternating perturbed-best and random
-restarts) for budget remaining after BFGS converges.
+Its SciPy adapter calls the same Objective.value_and_grad() method as Adam, so
+the Objective owns timing, logging, auxiliary feasibility, and budget accounting.
+The optimizer restarts after convergence while budget remains, alternating
+between perturbed-best and random initial points.
 
 Requires: scipy (``uv add 'dfbench[scipy]'``).
 """
@@ -13,7 +14,6 @@ from __future__ import annotations
 import warnings
 from dataclasses import dataclass
 
-import jax
 import jax.numpy as jnp
 import numpy as np
 from jaxtyping import Array, Float
@@ -43,23 +43,15 @@ class SciPyConfig:
 
 
 class SciPyObjectiveAdapter:
-    """Adapt the Objective to SciPy call signatures with fair logging.
+    """Adapt Objective.value()/value_and_grad() to SciPy call signatures.
 
     Caches the latest point so that SciPy's separate fun() and jac() calls for
-    the same x only trigger one logged evaluation.
+    the same x only trigger one Objective evaluation.
     """
 
     def __init__(self, obj: Objective, config: SciPyConfig) -> None:
         self.obj = obj
         self.config = config
-
-        func = obj.value_function(unbounded=config.unbounded)
-
-        self._value_fn = jax.jit(func)
-        self._value_and_grad_fn = None
-        if config.use_jac:
-            self._value_and_grad_fn = jax.jit(jax.value_and_grad(func))
-
         self._latest_x: np.ndarray | None = None
         self._latest_loss = None
         self._latest_grad = None
@@ -84,15 +76,11 @@ class SciPyObjectiveAdapter:
         return ()
 
     def warmup(self) -> None:
-        """Warm up the exact JAX paths this adapter will use."""
-        params = jnp.asarray(self.obj.random_params_bounded())
-        self._warmup_twice(self._value_fn, params)
-        if self._value_and_grad_fn is not None:
-            self._warmup_twice(self._value_and_grad_fn, params)
-
-    def _warmup_twice(self, fn, *args) -> None:
-        fn(*args)
-        fn(*args)
+        """Warm the same Objective method used by the SciPy callbacks."""
+        if self.config.use_jac:
+            self.obj.warmup_value_and_grad()
+        else:
+            self.obj.warmup_value()
 
     def _to_numpy_vector(self, x: Float[Array, "..."] | np.ndarray) -> np.ndarray:
         arr = np.asarray(x, dtype=float)
@@ -133,15 +121,14 @@ class SciPyObjectiveAdapter:
         if self._same_point(x_np):
             return self._sanitize_loss(float(self._latest_loss))
 
-        loss = self._value_fn(jnp.asarray(x_np))
-        self.obj.log_evaluation(jnp.asarray(x_np), loss, None)
+        loss = self.obj.value(jnp.asarray(x_np))
         self._cache_value_grad(x_np, loss, None)
         self._check_budget()
         return self._sanitize_loss(float(loss))
 
     def evaluate_value_and_grad(self, x: np.ndarray) -> tuple[float, np.ndarray]:
         """Return loss/grad and log exactly once for this point."""
-        if self._value_and_grad_fn is None:
+        if not self.config.use_jac:
             raise RuntimeError(
                 "evaluate_value_and_grad() requested without jac-enabled adapter."
             )
@@ -152,8 +139,7 @@ class SciPyObjectiveAdapter:
                 self._sanitize_grad(np.asarray(self._latest_grad, dtype=float)),
             )
 
-        loss, grad = self._value_and_grad_fn(jnp.asarray(x_np))
-        self.obj.log_evaluation(jnp.asarray(x_np), loss, grad)
+        loss, grad = self.obj.value_and_grad(jnp.asarray(x_np))
         self._cache_value_grad(x_np, loss, grad)
         self._check_budget()
         return (

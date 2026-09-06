@@ -109,14 +109,14 @@ class PyCMACMAES(OptimizationAlgorithm):
         max_iterations: int | None = None,
     ) -> None:
         obj = objective
-        problem = obj.problem
 
         random_seed, _ = self.prepare(obj, unbounded=False, random_seed=random_seed)
 
-        lb_np = np.asarray(problem.bounds[0])
-        ub_np = np.asarray(problem.bounds[1])
+        bounds = np.asarray(obj.bounds)
+        lb_np = np.asarray(bounds[0])
+        ub_np = np.asarray(bounds[1])
         width = ub_np - lb_np
-        n = problem.n_params
+        n = obj.n_params
 
         # Build the initial mean in unit-cube coordinates.
         if init_params is None:
@@ -134,9 +134,9 @@ class PyCMACMAES(OptimizationAlgorithm):
         warmup_bs = min(self._batch_size, pop_size)
         obj.warmup_vmap_value(batch_size=warmup_bs)
 
+        es = cma.CMAEvolutionStrategy(x0_unit.tolist(), sigma, opts)
         obj.start_logging()
 
-        es = cma.CMAEvolutionStrategy(x0_unit.tolist(), sigma, opts)
         iteration = 0
         while not es.stop() and not obj.budget_exceeded:
             if max_iterations is not None and iteration >= max_iterations:

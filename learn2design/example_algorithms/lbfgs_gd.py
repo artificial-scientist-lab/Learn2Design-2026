@@ -1,5 +1,8 @@
 # Reference: https://github.com/artificial-scientist-lab/Differometor-Benchmark/blob/main/src/dfbench/algorithms/gradient_based/lbfgs_gd.py
-import jax
+from __future__ import annotations
+
+import math
+
 import jax.numpy as jnp
 import optax
 from jaxtyping import Array, Float
@@ -8,23 +11,18 @@ from dfbench import Objective, OptimizationAlgorithm
 
 
 class LBFGSGD(OptimizationAlgorithm):
-    """L-BFGS quasi-Newton optimizer (Optax) with a custom JIT-compiled step."""
+    """Optax L-BFGS with Objective-managed Armijo evaluations.
+
+    Every initial, iterate, and backtracking probe goes through
+    Objective.value_and_grad(). No result is logged manually, so timing,
+    feasibility, histories, and evaluation counts use the same mechanism as
+    AdamGD.
+    """
 
     algorithm_str = "lbfgs_gd"
 
     def __init__(self) -> None:
         pass
-
-    @staticmethod
-    def _linesearch_eval_count(opt_state) -> int:
-        """Extract the number of line-search evaluations from the Optax L-BFGS state."""
-        states = opt_state if isinstance(opt_state, tuple) else (opt_state,)
-        for state in reversed(states):
-            info = getattr(state, "info", None)
-            num_steps = getattr(info, "num_linesearch_steps", None) if info else None
-            if num_steps is not None:
-                return int(jax.device_get(num_steps))
-        return 0
 
     def optimize(
         self,
@@ -32,53 +30,84 @@ class LBFGSGD(OptimizationAlgorithm):
         init_params: Float[Array, "..."] | None = None,
         random_seed: int | None = None,
         patience: int | None = None,
-        **lbfgs_kwargs,
+        learning_rate: float = 1.0,
+        memory_size: int = 10,
+        scale_init_precond: bool = True,
+        backtracking_factor: float = 0.5,
+        armijo_coefficient: float = 1e-4,
+        max_linesearch_steps: int = 20,
     ) -> None:
-        obj = objective
-        # L-BFGS works best in unbounded space where the loss is smooth.
-        self.prepare(obj, unbounded=True, random_seed=random_seed)
+        if learning_rate <= 0:
+            raise ValueError("learning_rate must be positive")
+        if not 0 < backtracking_factor < 1:
+            raise ValueError("backtracking_factor must be between zero and one")
+        if not 0 < armijo_coefficient < 1:
+            raise ValueError("armijo_coefficient must be between zero and one")
+        if max_linesearch_steps < 1:
+            raise ValueError("max_linesearch_steps must be positive")
 
+        obj = objective
+        self.prepare(obj, unbounded=True, random_seed=random_seed)
         params = init_params if init_params is not None else obj.random_params_unbounded()
 
-        # Grab the raw value function so Optax's internal line-search can probe
-        # intermediate points without going through the logging layer.
-        value_fn = obj.value_function(unbounded=True)
-        value_and_grad_fn = jax.value_and_grad(value_fn)
-
-        optimizer = optax.lbfgs(**lbfgs_kwargs)
+        # Optax provides the limited-memory inverse-Hessian direction. The
+        # line search stays outside Optax so every probe can use the normal
+        # Objective API and receive identical feasibility handling to Adam.
+        optimizer = optax.lbfgs(
+            learning_rate=1.0,
+            memory_size=memory_size,
+            scale_init_precond=scale_init_precond,
+            linesearch=None,
+        )
         opt_state = optimizer.init(params)
 
-        # One JIT-compiled step: compute loss+grad, run the L-BFGS update (which
-        # internally performs line search), and return the new params and state.
-        @jax.jit
-        def _step(params, opt_state):
-            loss, grads = value_and_grad_fn(params)
-            updates, new_state = optimizer.update(
-                grads, opt_state, params, value=loss, grad=grads, value_fn=value_fn,
-            )
-            new_params = jnp.asarray(optax.apply_updates(params, updates))
-            return new_params, new_state, loss, grads
-
-        # Warm up the JIT-compiled step twice so the first logged step is fast.
-        warmup_state = optimizer.init(obj.random_params_unbounded())
-        _, warmup_state, _, _ = _step(obj.random_params_unbounded(), warmup_state)
-        _ = _step(obj.random_params_unbounded(), warmup_state)
-
+        obj.warmup_value_and_grad()
         obj.start_logging()
+        loss, grads = obj.value_and_grad(params)
 
         while not obj.budget_exceeded:
-            prior_params = params
-            params, opt_state, loss, grads = _step(params, opt_state)
-
-            # Log the main step...
-            obj.log_evaluation(prior_params, loss, grads)
-
-            # ...plus any extra line-search evaluations Optax performed, so the
-            # evaluation budget accounts for every forward pass the optimizer used.
-            for _ in range(self._linesearch_eval_count(opt_state)):
-                if obj.budget_exceeded:
-                    break
-                obj.log_evaluation(prior_params, loss, grads)
-
             if patience is not None and obj.evals_since_improvement > patience:
                 break
+
+            updates, new_state = optimizer.update(
+                grads,
+                opt_state,
+                params,
+                value=loss,
+                grad=grads,
+            )
+            slope = float(jnp.vdot(grads, updates))
+            current_loss = float(loss)
+            step_size = learning_rate
+
+            candidate_params = params
+            candidate_loss = loss
+            candidate_grads = grads
+            for _ in range(max_linesearch_steps):
+                candidate_params = optax.apply_updates(
+                    params,
+                    step_size * updates,
+                )
+                candidate_loss, candidate_grads = obj.value_and_grad(candidate_params)
+                if obj.budget_exceeded:
+                    return
+
+                candidate_value = float(candidate_loss)
+                if math.isfinite(candidate_value):
+                    if not math.isfinite(current_loss):
+                        break
+                    if slope < 0:
+                        armijo_limit = (
+                            current_loss
+                            + armijo_coefficient * step_size * slope
+                        )
+                        if candidate_value <= armijo_limit:
+                            break
+                    elif candidate_value < current_loss:
+                        break
+                step_size *= backtracking_factor
+
+            params = candidate_params
+            loss = candidate_loss
+            grads = candidate_grads
+            opt_state = new_state
