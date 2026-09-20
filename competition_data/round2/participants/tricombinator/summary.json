@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 128338.4,
+  "mean_evaluations_per_second": 8.911735329987351,
+  "mean_feasible_fraction": 0.4444611852374699,
+  "mean_time_to_best_minutes": 205.84071257551508,
+  "participant_id": "tricombinator",
+  "rank": 49,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 2.6370594636053113,
+    "mean": 1.0539114713333482,
+    "median": 0.6733610207342677,
+    "minimum": 0.4005859185737144,
+    "run_count": 10,
+    "sem": 0.26677846936866484,
+    "std": 0.8436275938984432
+  },
+  "time_to_best_run_count": 10
+}

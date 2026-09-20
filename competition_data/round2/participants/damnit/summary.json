@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 153880.6,
+  "mean_evaluations_per_second": 10.68820421159137,
+  "mean_feasible_fraction": 0.8088276580252151,
+  "mean_time_to_best_minutes": 236.0092926239967,
+  "participant_id": "damnit",
+  "rank": 20,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.47735004122524644,
+    "mean": 0.32173848760093937,
+    "median": 0.2469111710057743,
+    "minimum": 0.194480392600655,
+    "run_count": 10,
+    "sem": 0.042146407391608395,
+    "std": 0.13327864255083868
+  },
+  "time_to_best_run_count": 10
+}

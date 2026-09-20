@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 55679.5,
+  "mean_evaluations_per_second": 3.8666084335805215,
+  "mean_feasible_fraction": 0.6443498596127994,
+  "mean_time_to_best_minutes": 229.38290984749793,
+  "participant_id": "polarhippo",
+  "rank": 33,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.8990843644580058,
+    "mean": 0.45787432211051593,
+    "median": 0.4158368796401448,
+    "minimum": 0.35257671847732186,
+    "run_count": 10,
+    "sem": 0.05008787452022187,
+    "std": 0.1583917666406146
+  },
+  "time_to_best_run_count": 10
+}

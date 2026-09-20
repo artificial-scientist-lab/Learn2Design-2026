@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 123988.6,
+  "mean_evaluations_per_second": 8.609989326650325,
+  "mean_feasible_fraction": 0.7340871357688489,
+  "mean_time_to_best_minutes": 185.34785956303278,
+  "participant_id": "jiabao",
+  "rank": 44,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 3.7262724246858387,
+    "mean": 0.7557137716637736,
+    "median": 0.4495920279140254,
+    "minimum": 0.16462577547014726,
+    "run_count": 10,
+    "sem": 0.3347940100637046,
+    "std": 1.0587116187826406
+  },
+  "time_to_best_run_count": 10
+}

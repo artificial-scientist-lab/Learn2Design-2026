@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 55195.3,
+  "mean_evaluations_per_second": 3.8329764905613217,
+  "mean_feasible_fraction": 0.6102039180885209,
+  "mean_time_to_best_minutes": 157.48625531077386,
+  "participant_id": "thelight",
+  "rank": 51,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 4.115763652601194,
+    "mean": 1.3795104819628685,
+    "median": 0.5768522618184341,
+    "minimum": 0.4098758088160072,
+    "run_count": 10,
+    "sem": 0.4738123894037103,
+    "std": 1.498326334122354
+  },
+  "time_to_best_run_count": 10
+}

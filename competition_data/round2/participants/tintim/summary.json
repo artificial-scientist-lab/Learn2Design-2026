@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 146203.1,
+  "mean_evaluations_per_second": 10.152721889115318,
+  "mean_feasible_fraction": 0.6689071719295735,
+  "mean_time_to_best_minutes": 175.65642402648928,
+  "participant_id": "tintim",
+  "rank": 39,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.8445048146267613,
+    "mean": 0.6344551046027208,
+    "median": 0.6632130357280077,
+    "minimum": 0.4071682218227282,
+    "run_count": 10,
+    "sem": 0.05112795874010068,
+    "std": 0.16168080173383104
+  },
+  "time_to_best_run_count": 10
+}

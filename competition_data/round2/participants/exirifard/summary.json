@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 132021.2,
+  "mean_evaluations_per_second": 9.168036700096625,
+  "mean_feasible_fraction": 0.7956444391093942,
+  "mean_time_to_best_minutes": 236.92452860593795,
+  "participant_id": "exirifard",
+  "rank": 18,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.42185714243925226,
+    "mean": 0.29783376556924684,
+    "median": 0.353153223634142,
+    "minimum": -0.12547624279762476,
+    "run_count": 10,
+    "sem": 0.05273375755372139,
+    "std": 0.16675878344886869
+  },
+  "time_to_best_run_count": 10
+}

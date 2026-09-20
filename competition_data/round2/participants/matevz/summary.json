@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 138025.6,
+  "mean_evaluations_per_second": 9.584790434164649,
+  "mean_feasible_fraction": 0.8450852559169453,
+  "mean_time_to_best_minutes": 225.5121102543672,
+  "participant_id": "matevz",
+  "rank": 12,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.4247043365777688,
+    "mean": 0.21595209712899247,
+    "median": 0.27034044503206106,
+    "minimum": -0.2611124464973107,
+    "run_count": 10,
+    "sem": 0.06860956882216565,
+    "std": 0.2169625067601194
+  },
+  "time_to_best_run_count": 10
+}

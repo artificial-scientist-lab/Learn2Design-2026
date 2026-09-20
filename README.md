@@ -6,8 +6,12 @@
 [![Static Badge](https://img.shields.io/badge/Codabench-Submit-4CB2AD)](https://submit.learn2design2026.com/competitions/4/)
 
 > [!IMPORTANT]
-> **Round 2 is now complete, with 60 submissions received.** Thank you to all participants for taking part!
-> Evaluation of all submissions is now underway, and the updated leaderboard will be published on September 21.
+> **The Round 2 leaderboard and detailed evaluation data have now been
+> released.** See the [Round 2 leaderboard](#round-2-leaderboard) and the
+> [Round 2 data release](competition_data/round2/) with all ten run scores,
+> uncertainty, convergence checkpoints, efficiency, and feasibility statistics
+> for every evaluated participant. The corresponding
+> [Round 1 data](competition_data/round1/) remains available as well.
 
 ## A physics experiment design competition for gravitational-wave detectors
 
@@ -48,19 +52,19 @@ Beyond gravitational-wave detection, Learn2Design-2026 asks a broader scientific
 
 More information is available in the accepted proposal for [Learn2Design-2026](Learn2Design_details.pdf).
 
-## Round 1 leaderboard
+## Round 2 leaderboard
 
-Round 1 evaluated 43 participant submissions on the same ten hidden UIFO
+Round 2 evaluated 60 participant submissions on the same ten hidden UIFO
 topologies. The figure compares their mean best feasible loss (lower is better)
 with the seven organizer baselines; error bars show one standard error of the
 mean across the ten runs.
 
 <p align="left">
-  <img src="media/round1_leaderboard.png" alt="Learn2Design 2026 Round 1 leaderboard with participant and organizer-baseline scores" width="720">
+  <img src="media/round2_leaderboard.png" alt="Learn2Design 2026 Round 2 leaderboard with participant and organizer-baseline scores" width="720">
 </p>
 
 Exact per-run results, convergence checkpoints, efficiency statistics, and
-participant reports are available in the [Round 1 evaluation data](competition_data/round1/).
+participant reports are available in the [Round 2 evaluation data](competition_data/round2/).
 
 ## Prize money
 
@@ -261,6 +265,14 @@ Each component has parameters that can be optimized within certain
 For the topology string format, component-code mapping, and ways to instantiate
 UIFO topologies directly, see [Explanation of "Topology"](docs/dfbench_overview.md#explanation-of-topology).
 
+A [worked Voyager embedding](examples/voyager_uifo/README.md) supplies a 3×3 UIFO
+topology, full physical parameters, executable reference checks, and a custom
+`VoyagerUIFOProblem` usable through the normal `Objective` API. It also documents
+the overrides needed beyond the competition's bounded parameter vector.
+For a self-contained file to share, use [voyager_uifo_standalone.py](examples/voyager_uifo_standalone.py).
+The companion [random-initialization example](examples/evaluate_random_initializations.py)
+evaluates many parameter vectors in parallel batches through `Objective.vmap_value_aux`.
+
 The goal is to find algorithms that work well on any UIFO topology sampled from this search space; two example topologies are visualized in the figure below. Each evaluation runs on its own 10 hidden topologies.
 
 <p align="center">
@@ -444,7 +456,7 @@ policy, time budget, and evaluation procedure.
 | 09.07.2026 | Start of competition |
 | 10.08.2026, 12:00 UTC | [Submission platform](https://submit.learn2design2026.com/) opens |
 | 26.08.2026, AoE | First submission deadline -- [Round 1 data release](competition_data/round1/) |
-| 12.09.2026, AoE | Second submission deadline |
+| 12.09.2026, AoE | Second submission deadline -- [Round 2 data release](competition_data/round2/) |
 | 29.09.2026, AoE | Third submission deadline |
 | 15.10.2026, AoE | Final submission deadline |
 | Before workshop | Private leaderboard announced |

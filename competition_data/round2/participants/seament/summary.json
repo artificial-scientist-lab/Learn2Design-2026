@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 84964.6,
+  "mean_evaluations_per_second": 5.890850371310146,
+  "mean_feasible_fraction": 0.6117452558797468,
+  "mean_time_to_best_minutes": 200.98111684958138,
+  "participant_id": "seament",
+  "rank": 13,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.42053370253643657,
+    "mean": 0.23545181471741222,
+    "median": 0.2782563016180229,
+    "minimum": -0.20277575986982765,
+    "run_count": 10,
+    "sem": 0.06651948491545664,
+    "std": 0.21035308111405607
+  },
+  "time_to_best_run_count": 10
+}

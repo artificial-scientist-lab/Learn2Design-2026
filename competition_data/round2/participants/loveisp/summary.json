@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 131464.0,
+  "mean_evaluations_per_second": 9.12930737417219,
+  "mean_feasible_fraction": 0.7902458536053816,
+  "mean_time_to_best_minutes": 205.12163376053178,
+  "participant_id": "loveisp",
+  "rank": 25,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.6656921758759025,
+    "mean": 0.36240396041141776,
+    "median": 0.3761704968773938,
+    "minimum": 0.14453899510004906,
+    "run_count": 10,
+    "sem": 0.045065519954894585,
+    "std": 0.14250968699723546
+  },
+  "time_to_best_run_count": 10
+}

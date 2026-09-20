@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 131116.4,
+  "mean_evaluations_per_second": 9.105199184105878,
+  "mean_feasible_fraction": 0.9200151060821786,
+  "mean_time_to_best_minutes": 203.86901974002518,
+  "participant_id": "aioait",
+  "rank": 26,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 0.5434319607169629,
+    "mean": 0.3837593600206549,
+    "median": 0.42235423978128916,
+    "minimum": 0.1464843263914809,
+    "run_count": 10,
+    "sem": 0.03806157289664092,
+    "std": 0.12036126168191788
+  },
+  "time_to_best_run_count": 10
+}

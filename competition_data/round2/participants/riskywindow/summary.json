@@ -1,0 +1,23 @@
+{
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 10 evaluations. The 240-minute values are exact official run scores.",
+  "evaluated_participant_count": 60,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "mean_evaluation_count": 56369.3,
+  "mean_evaluations_per_second": 3.9144969469098627,
+  "mean_feasible_fraction": 0.56186670815257,
+  "mean_time_to_best_minutes": 157.7578283405304,
+  "participant_id": "riskywindow",
+  "rank": 56,
+  "schema_version": "1.0.0",
+  "score": {
+    "maximum": 3.393492100642334,
+    "mean": 2.7631867965073433,
+    "median": 2.7778988403867793,
+    "minimum": 2.2463922198037287,
+    "run_count": 10,
+    "sem": 0.10412035153307993,
+    "std": 0.32925746162193714
+  },
+  "time_to_best_run_count": 10
+}
