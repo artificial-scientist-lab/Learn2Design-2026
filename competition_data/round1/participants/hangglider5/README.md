@@ -22,6 +22,5 @@
 - `convergence.png`: visual summary of the convergence data.
 
 Intermediate checkpoint values are marked as exact when the final best was
-already known to have been reached. Otherwise they are sampled upper bounds
-derived from one stored candidate every 25 evaluations. The 240-minute values
-are the exact official run scores.
+already known to have been reached. Otherwise they are sampled upper bounds.
+The 240-minute values are the exact official run scores.

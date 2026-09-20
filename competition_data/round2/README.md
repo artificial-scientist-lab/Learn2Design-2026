@@ -34,5 +34,5 @@ use different hidden topologies.
 
 Lower loss is better. Standard deviations use the sample definition (`ddof=1`),
 and SEM is `std / sqrt(10)` for complete final results. Intermediate checkpoints
-are derived from one stored candidate every 10 evaluations; the 240-minute values
-are the exact official run scores.
+are sampled upper bounds unless marked as exact; the 240-minute values are the
+exact official run scores.

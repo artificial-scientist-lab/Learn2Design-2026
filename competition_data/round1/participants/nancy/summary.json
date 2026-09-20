@@ -1,5 +1,5 @@
 {
-  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are upper bounds derived from one recorded candidate every 25 evaluations. The 240-minute values are exact official run scores.",
+  "checkpoint_note": "Intermediate checkpoint values are exact when the final best had already been reached; otherwise they are sampled upper bounds. The 240-minute values are exact official run scores.",
   "evaluated_participant_count": 43,
   "failed_runs": 0,
   "fallback_runs": 1,
