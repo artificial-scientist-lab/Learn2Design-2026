@@ -33,6 +33,33 @@ weights, in the archive.
 The evaluation script runs from the root of the extracted archive, so your code
 can access these files using relative paths.
 
+### Local validation
+
+Run the repository's validator before uploading:
+
+```bash
+python tools/validate_submission.py submission.zip
+```
+
+By default, this performs static checks only and does not install dependencies
+or execute the optimizer. It checks the archive layout, Python syntax,
+`OptimizationAlgorithm` subclass, dependency declarations, unsafe archive
+entries, and prohibited simulator imports.
+
+The optional local run executes the submission on one newly generated UIFO
+topology using the current Python environment and local hardware:
+
+```bash
+python tools/validate_submission.py submission.zip \
+  --run-local --max-time-seconds 300
+```
+
+Omit `--max-time-seconds` to use the official four-hour Objective budget. The
+local run reports evaluation and feasibility statistics together with the best
+feasible loss. It does not install submission dependencies automatically and
+does not reproduce an official leaderboard score. Because `--run-local`
+executes code from the archive, use it only with submissions you trust.
+
 Competition entries are not submitted as public pull requests. This keeps
 unreleased methods private until the organizers evaluate them, which reduces
 copying between participants.

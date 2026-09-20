@@ -448,6 +448,29 @@ archive, so access bundled files using relative paths. See the
 [submission rules](docs/submission.md) for the complete format, dependency
 policy, time budget, and evaluation procedure.
 
+### Validate a submission locally
+
+The repository includes a portable validator for checking the ZIP structure,
+Python syntax, algorithm interface, dependency declarations, and prohibited
+simulator imports without executing participant code:
+
+```bash
+python tools/validate_submission.py submission.zip
+```
+
+To run the submission on one freshly generated UIFO topology in your current
+environment, use `--run-local`. The default Objective budget is the official
+four hours; use a shorter budget for a quick smoke test:
+
+```bash
+python tools/validate_submission.py submission.zip \
+  --run-local --max-time-seconds 300
+```
+
+Local execution runs code from the submitted archive and uses the dependencies
+and hardware already available in your environment. It is a compatibility test,
+not an official leaderboard evaluation.
+
 
 ## Timeline
 
