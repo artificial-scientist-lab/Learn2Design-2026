@@ -6,12 +6,11 @@
 [![Static Badge](https://img.shields.io/badge/Codabench-Submit-4CB2AD)](https://submit.learn2design2026.com/competitions/4/)
 
 > [!IMPORTANT]
-> **The Round 2 leaderboard and detailed evaluation data have now been
-> released.** See the [Round 2 leaderboard](#round-2-leaderboard) and the
-> [Round 2 data release](competition_data/round2/) with all ten run scores,
-> uncertainty, convergence checkpoints, efficiency, and feasibility statistics
-> for every evaluated participant. The corresponding
-> [Round 1 data](competition_data/round1/) remains available as well.
+> **Round 3 is now complete, and evaluation of all submissions is underway.**
+> The updated leaderboard and detailed Round 3 evaluation data will be published
+> by October 7. In the meantime, the [Round 2 leaderboard](#round-2-leaderboard)
+> and the corresponding [Round 2 data](competition_data/round2/) and
+> [Round 1 data](competition_data/round1/) remain available.
 
 ## A physics experiment design competition for gravitational-wave detectors
 
