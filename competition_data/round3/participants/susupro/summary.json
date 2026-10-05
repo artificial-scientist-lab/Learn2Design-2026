@@ -25,6 +25,6 @@
     "maximum": 0.42809858242289833,
     "run_count": 10
   },
-  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. A feasible improvement is included only when it is known to have occurred by that Objective time. Missing values are left blank. The 240 minute values are exact official run scores, including any explicitly marked RandomSearch fallback.",
-  "feasibility_note": "Feasibility counts and fractions describe the retained Objective history observations. Batched calls may retain only their lowest loss candidate, so this is not the fraction of all evaluated candidates. The observation count is provided as the denominator; evaluation_count separately includes all admitted candidates."
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. The 240-minute values are official run scores; missing values and fallbacks are marked.",
+  "feasibility_note": "Feasibility fractions refer to history observations, not all evaluated candidates."
 }
