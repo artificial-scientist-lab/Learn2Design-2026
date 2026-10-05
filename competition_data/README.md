@@ -10,7 +10,7 @@ their evaluation outcomes.
   Round 1 participants.
 - [Round 2](round2/): results and convergence statistics for all evaluated
   Round 2 participants.
-- [Round 3](round3/): results and convergence statistics for the 67 participants
-  on the Round 3 leaderboard, covering 670 runs.
+- [Round 3](round3/): results and convergence statistics for all evaluated
+  Round 3 participants.
 
 Each round directory documents its files, metric definitions, and precision.
