@@ -1,0 +1,30 @@
+{
+  "rank": 48,
+  "participant_id": "nacolu",
+  "mean_feasible_loss": 0.45284967086107714,
+  "score_std": 0.18537158333058412,
+  "score_sem": 0.05861964167963473,
+  "score_median": 0.4198684971178711,
+  "minimum_run_score": 0.15956591380032245,
+  "maximum_run_score": 0.8931473828498446,
+  "mean_time_to_best_minutes": 212.73642323533693,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 55744.3,
+  "mean_evaluations_per_second": 3.8709486582581953,
+  "mean_feasible_history_fraction": 0.8838187755475759,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.1",
+  "evaluated_participant_count": 67,
+  "score": {
+    "mean": 0.45284967086107714,
+    "std": 0.18537158333058412,
+    "sem": 0.05861964167963473,
+    "median": 0.4198684971178711,
+    "minimum": 0.15956591380032245,
+    "maximum": 0.8931473828498446,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. A feasible improvement is included only when it is known to have occurred by that Objective time. Missing values are left blank. The 240 minute values are exact official run scores, including any explicitly marked RandomSearch fallback.",
+  "feasibility_note": "Feasibility counts and fractions describe the retained Objective history observations. Batched calls may retain only their lowest loss candidate, so this is not the fraction of all evaluated candidates. The observation count is provided as the denominator; evaluation_count separately includes all admitted candidates."
+}

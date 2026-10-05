@@ -6,11 +6,13 @@
 [![Static Badge](https://img.shields.io/badge/Codabench-Submit-4CB2AD)](https://submit.learn2design2026.com/competitions/4/)
 
 > [!IMPORTANT]
-> **Round 3 is now complete, and evaluation of all submissions is underway.**
-> The updated leaderboard and detailed Round 3 evaluation data will be published
-> by October 7. In the meantime, the [Round 2 leaderboard](#round-2-leaderboard)
-> and the corresponding [Round 2 data](competition_data/round2/) and
-> [Round 1 data](competition_data/round1/) remain available.
+> **The Round 3 leaderboard and detailed evaluation data have now been
+> released.** See the [Round 3 leaderboard](#round-3-leaderboard) and the
+> [Round 3 data release](competition_data/round3/) with all ten run scores,
+> uncertainty, convergence checkpoints, efficiency, and feasibility statistics
+> for every listed participant. The corresponding
+> [Round 2 data](competition_data/round2/) and
+> [Round 1 data](competition_data/round1/) remain available as well.
 
 ## A physics experiment design competition for gravitational-wave detectors
 
@@ -51,19 +53,19 @@ Beyond gravitational-wave detection, Learn2Design-2026 asks a broader scientific
 
 More information is available in the accepted proposal for [Learn2Design-2026](Learn2Design_details.pdf).
 
-## Round 2 leaderboard
+## Round 3 leaderboard
 
-Round 2 evaluated 60 participant submissions on the same ten hidden UIFO
-topologies. The figure compares their mean best feasible loss (lower is better)
-with the seven organizer baselines; error bars show one standard error of the
-mean across the ten runs.
+The Round 3 leaderboard includes 67 participant submissions evaluated on the
+same ten hidden UIFO topologies. The figure compares their mean best feasible
+loss (lower is better) with the seven organizer baselines; error bars show one
+standard error of the mean across the ten runs.
 
 <p align="left">
-  <img src="media/round2_leaderboard.png" alt="Learn2Design 2026 Round 2 leaderboard with participant and organizer-baseline scores" width="720">
+  <img src="media/round3_leaderboard.png" alt="Learn2Design 2026 Round 3 leaderboard with participant and organizer-baseline scores" width="720">
 </p>
 
 Exact per-run results, convergence checkpoints, efficiency statistics, and
-participant reports are available in the [Round 2 evaluation data](competition_data/round2/).
+participant reports are available in the [Round 3 evaluation data](competition_data/round3/).
 
 ## Prize money
 

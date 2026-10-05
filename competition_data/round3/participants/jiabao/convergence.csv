@@ -1,0 +1,7 @@
+rank,participant_id,elapsed_minutes,runs_with_value,mean_best_feasible_loss,std_best_feasible_loss,sem_best_feasible_loss,median_best_feasible_loss,minimum_best_feasible_loss,maximum_best_feasible_loss,exact_run_count,conservative_upper_bound_run_count,missing_run_count
+59,jiabao,15,0,,,,,,,0,0,10
+59,jiabao,30,0,,,,,,,0,0,10
+59,jiabao,60,0,,,,,,,0,0,10
+59,jiabao,120,0,,,,,,,0,0,10
+59,jiabao,180,0,,,,,,,0,0,10
+59,jiabao,240,10,0.992508119063582,1.260436918789381,0.39858515103391245,0.4894980033108308,0.3445775172415758,4.48478324558706,10,0,0

@@ -1,0 +1,30 @@
+{
+  "rank": 7,
+  "participant_id": "lodev",
+  "mean_feasible_loss": -0.11556449736942798,
+  "score_std": 0.20280808645160178,
+  "score_sem": 0.06413354810873977,
+  "score_median": -0.08111609808979825,
+  "minimum_run_score": -0.43489770417708074,
+  "maximum_run_score": 0.0955437906367172,
+  "mean_time_to_best_minutes": 232.8875033501784,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 165742.8,
+  "mean_evaluations_per_second": 11.508662016871561,
+  "mean_feasible_history_fraction": 0.9353095945521354,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.1",
+  "evaluated_participant_count": 67,
+  "score": {
+    "mean": -0.11556449736942798,
+    "std": 0.20280808645160178,
+    "sem": 0.06413354810873977,
+    "median": -0.08111609808979825,
+    "minimum": -0.43489770417708074,
+    "maximum": 0.0955437906367172,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. A feasible improvement is included only when it is known to have occurred by that Objective time. Missing values are left blank. The 240 minute values are exact official run scores, including any explicitly marked RandomSearch fallback.",
+  "feasibility_note": "Feasibility counts and fractions describe the retained Objective history observations. Batched calls may retain only their lowest loss candidate, so this is not the fraction of all evaluated candidates. The observation count is provided as the denominator; evaluation_count separately includes all admitted candidates."
+}
