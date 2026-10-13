@@ -89,7 +89,11 @@ Each participant run is allocated:
 - 16 vCPUs on an Intel Xeon Platinum 8468 host
 - 128 GiB RAM
 - 40 GiB SSD
-- Ubuntu 22.04 LTS with CUDA 13
+- Ubuntu 24.04.3 LTS with CUDA 13
+
+Each submission uses a separate Python 3.12.3 environment. See the
+[evaluation environment reference](evaluation-environment.md) for the current
+NVIDIA driver, fixed core packages, and reference CUDA library versions.
 
 ### Batched Objective scaling
 
@@ -119,7 +123,7 @@ Official budget per topology: exactly 4 hours of wall-clock time after
 `objective.start_logging()`. Objective-provided JIT warmup before
 `objective.start_logging()` does not count.
 
-The full per-topology container runtime is capped at 4 h 30 min from the start
+The full per-topology run is capped at 4 h 30 min from the start
 of the participant run. This includes any work before `objective.start_logging()`
 and after the Objective budget is exhausted.
 
@@ -160,17 +164,27 @@ The evaluation environment ships with a common base (`dfbench`, `differometor`,
 `botorch`, `nevergrad`, `evosax`). The evaluator installs the packages listed in
 the mandatory root-level `requirements.txt` before running your algorithm.
 
+The simulator and JAX package versions are fixed: declarations for `dfbench`,
+`differometor`, `jax`, `jaxlib`, and the JAX CUDA plugins are ignored. Other
+requirements, including `nvidia-*` library pins, are honored when compatible
+with the fixed core. These NVIDIA libraries are not globally pinned; see the
+[evaluation environment reference](evaluation-environment.md#dependency-policy)
+for the exact policy and reference versions. Dependency installation finishes
+before the timed optimization starts.
+
 ---
 
 ## Evaluation procedure
 
-1. Your ZIP archive is extracted into an isolated Docker container. The
-   evaluator verifies the two mandatory root files and installs the packages
-   listed in `requirements.txt`.
-2. The evaluator runs from the extracted archive root with no network access
-   and loads the algorithm class from `submission.py`. The filesystem is
-   writable; the container is ephemeral and discarded after the run, so
-   anything you write is gone afterwards.
+1. The evaluator verifies the two mandatory root files and prepares a separate
+   Python environment for your submission, installing its dependencies under
+   the policy above. The current evaluation setup does not specify a common
+   Docker base image.
+2. For each run, the archive is extracted into a writable temporary working
+   directory. The evaluator runs from that directory and loads the algorithm
+   class from `submission.py`. Your algorithm must be able to run without
+   network access. Do not rely on files written during one run being available
+   in another.
 3. For each evaluation, your submission is run on 10 new hidden topologies. For
    each topology, your `optimize()` is called once with a fresh
    [`Objective`](dfbench/Objective-API-Reference.md), a fixed random seed, and
