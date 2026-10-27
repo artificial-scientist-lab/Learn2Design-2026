@@ -1,0 +1,7 @@
+rank,participant_id,elapsed_minutes,runs_with_value,mean_best_feasible_loss,std_best_feasible_loss,sem_best_feasible_loss,median_best_feasible_loss,minimum_best_feasible_loss,maximum_best_feasible_loss,exact_run_count,conservative_upper_bound_run_count,missing_run_count
+109,trigerfly,15,0,,,,,,,0,0,10
+109,trigerfly,30,0,,,,,,,0,0,10
+109,trigerfly,60,0,,,,,,,0,0,10
+109,trigerfly,120,0,,,,,,,0,0,10
+109,trigerfly,180,0,,,,,,,0,0,10
+109,trigerfly,240,10,4.819548245373045,0.061772130901904955,0.019534062957209084,4.812030013835053,4.741984682169504,4.923079330349797,10,0,0

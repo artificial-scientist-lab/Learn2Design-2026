@@ -58,7 +58,7 @@ losses = obj.vmap_value(params_jax)
 losses_torch = j2t(losses)            # JAX -> PyTorch
 ```
 
-The conversion goes through NumPy and adds negligible overhead; see [tensor conversion helpers](Utilities-and-Helpers.md#tensor-conversion-t2j-j2t).
+The conversion goes through NumPy and adds negligible overhead; see [tensor conversion helpers](Utilities-and-Helpers.md#tensor-conversion-t2j--j2t).
 
 ---
 

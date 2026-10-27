@@ -1,0 +1,30 @@
+{
+  "rank": 101,
+  "participant_id": "habitt",
+  "mean_feasible_loss": 2.17679583079318,
+  "score_std": 0.6470408463907557,
+  "score_sem": 0.20461228137579265,
+  "score_median": 1.9743119938350322,
+  "minimum_run_score": 1.3409499019192186,
+  "maximum_run_score": 3.269142066704753,
+  "mean_time_to_best_minutes": 119.14549692471822,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 56052.2,
+  "mean_evaluations_per_second": 3.892340829846392,
+  "mean_feasible_history_fraction": 0.5644591118801298,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.3",
+  "evaluated_participant_count": 110,
+  "score": {
+    "mean": 2.17679583079318,
+    "std": 0.6470408463907557,
+    "sem": 0.20461228137579265,
+    "median": 1.9743119938350322,
+    "minimum": 1.3409499019192186,
+    "maximum": 3.269142066704753,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. The 240-minute values are final run scores; missing values and fallbacks are marked.",
+  "feasibility_note": "Feasibility fractions refer to history observations, not all evaluated candidates."
+}

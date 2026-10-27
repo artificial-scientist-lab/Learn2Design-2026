@@ -1,0 +1,30 @@
+{
+  "rank": 83,
+  "participant_id": "hocayi",
+  "mean_feasible_loss": 0.6108657936419617,
+  "score_std": 0.5983800395301418,
+  "score_sem": 0.18922438312968393,
+  "score_median": 0.4260509883372605,
+  "minimum_run_score": 0.1696744923625925,
+  "maximum_run_score": 2.25787000197282,
+  "mean_time_to_best_minutes": 211.1713148101171,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 55514.3,
+  "mean_evaluations_per_second": 3.903294635887744,
+  "mean_feasible_history_fraction": 0.7033302836961658,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.3",
+  "evaluated_participant_count": 110,
+  "score": {
+    "mean": 0.6108657936419617,
+    "std": 0.5983800395301418,
+    "sem": 0.18922438312968393,
+    "median": 0.4260509883372605,
+    "minimum": 0.1696744923625925,
+    "maximum": 2.25787000197282,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. The 240-minute values are final run scores; missing values and fallbacks are marked.",
+  "feasibility_note": "Feasibility fractions refer to history observations, not all evaluated candidates."
+}

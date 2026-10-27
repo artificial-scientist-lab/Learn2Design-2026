@@ -1,0 +1,30 @@
+{
+  "rank": 1,
+  "participant_id": "seament",
+  "mean_feasible_loss": -0.9347384637141957,
+  "score_std": 0.04609779264222905,
+  "score_sem": 0.014577401985559521,
+  "score_median": -0.9563093149460684,
+  "minimum_run_score": -0.9740515231274023,
+  "maximum_run_score": -0.8346638651770144,
+  "mean_time_to_best_minutes": 215.81679941892625,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 136524.4,
+  "mean_evaluations_per_second": 9.480408400006086,
+  "mean_feasible_history_fraction": 0.7943965028687501,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.3",
+  "evaluated_participant_count": 110,
+  "score": {
+    "mean": -0.9347384637141957,
+    "std": 0.04609779264222905,
+    "sem": 0.014577401985559521,
+    "median": -0.9563093149460684,
+    "minimum": -0.9740515231274023,
+    "maximum": -0.8346638651770144,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. The 240-minute values are final run scores; missing values and fallbacks are marked.",
+  "feasibility_note": "Feasibility fractions refer to history observations, not all evaluated candidates."
+}

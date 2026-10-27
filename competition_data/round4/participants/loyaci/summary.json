@@ -1,0 +1,30 @@
+{
+  "rank": 78,
+  "participant_id": "loyaci",
+  "mean_feasible_loss": 0.49786020069558334,
+  "score_std": 0.2222025895138579,
+  "score_sem": 0.07026662848512374,
+  "score_median": 0.426688079258251,
+  "minimum_run_score": 0.30862282810962205,
+  "maximum_run_score": 1.0664373316857425,
+  "mean_time_to_best_minutes": 170.25103947440783,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 55803.7,
+  "mean_evaluations_per_second": 3.8750787995391596,
+  "mean_feasible_history_fraction": 0.8017047456381949,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.3",
+  "evaluated_participant_count": 110,
+  "score": {
+    "mean": 0.49786020069558334,
+    "std": 0.2222025895138579,
+    "sem": 0.07026662848512374,
+    "median": 0.426688079258251,
+    "minimum": 0.30862282810962205,
+    "maximum": 1.0664373316857425,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. The 240-minute values are final run scores; missing values and fallbacks are marked.",
+  "feasibility_note": "Feasibility fractions refer to history observations, not all evaluated candidates."
+}

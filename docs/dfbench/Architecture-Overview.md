@@ -54,7 +54,7 @@ A problem defines *what* is being optimised. Every problem subclasses `Continuou
 | `objective_function` | Loss in **bounded** parameter space (used by e.g. evolutionary / surrogate algorithms) |
 | `bounds` | `(2, n_params)` lower / upper limits |
 | `optimization_pairs` | `[(component, property), ...]` mapping each parameter index to a Differometor component |
-| `to_spec() -> dict` | Reconstructive spec: a small, JSON-serialisable dict sufficient to rebuild an equivalent problem instance (see [Problems](Problems)) |
+| `to_spec() -> dict` | Reconstructive spec: a small, JSON-serialisable dict sufficient to rebuild an equivalent problem instance (see [Problems](Problems.md)) |
 | `to_problem_spec() -> ProblemSpec` | Typed container wrapping `to_spec()`; carries `type`, `version`, `params`. This is what checkpoints embed. |
 
 **Rationale (one bounded problem function):** Some optimization methods benefit from unconstrained $(-\infty, +\infty)$ space where gradients flow smoothly without hitting box-constraint boundaries. `Objective` provides that mapping layer so problem implementations only need to define the bounded loss.
@@ -74,7 +74,7 @@ A problem defines *what* is being optimised. Every problem subclasses `Continuou
 
 **Rationale: Why a wrapper instead of bare functions?** Without it, every algorithm would need to independently implement timing, budget checks, history logging, checkpointing, and bounded<->unbounded transforms. This both duplicates code and makes cross-algorithm comparison unreliable because each implementation might measure time or count evaluations slightly differently.
 
-**Rationale of decoupled storage:** `Objective` only builds/applies the canonical `RunState` data contract; the *how* (NPZ vs JSON) and *where* (local disk vs S3) of saving are handled by an internally-assembled `CheckpointManager`. The storage components (serializer, backend, resolver) are modular and testable in isolation but are not user-facing constructor parameters; the only storage knob exposed is `save_to_file_every`. No `./data/...` path is hardcoded in `Objective`.
+**Rationale of decoupled storage:** `Objective` only builds/applies the canonical `RunState` data contract; the *how* (NPZ vs JSON) and *where* (local disk vs S3) of saving are handled by an internally-assembled `CheckpointManager`. The storage components (serializer, backend, resolver) are modular and testable in isolation but are not user-facing constructor parameters; checkpoint settings are exposed through `save_to_file_every`, `checkpoint_format`, and `checkpoint_dir`. The default artifact root is `./data/objective_run_data`; set `checkpoint_dir` to override it.
 
 ### 3. Algorithm Layer (`core/algorithm.py`, `algorithms/`)
 

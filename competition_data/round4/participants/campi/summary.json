@@ -1,0 +1,30 @@
+{
+  "rank": 48,
+  "participant_id": "campi",
+  "mean_feasible_loss": 0.2869027334451989,
+  "score_std": 0.12429817077405572,
+  "score_sem": 0.03930653286385905,
+  "score_median": 0.28232344207339916,
+  "minimum_run_score": 0.05862292298488768,
+  "maximum_run_score": 0.4370697350419998,
+  "mean_time_to_best_minutes": 149.5198137851556,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 164465.0,
+  "mean_evaluations_per_second": 11.420468954138439,
+  "mean_feasible_history_fraction": 0.947476055163442,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.3",
+  "evaluated_participant_count": 110,
+  "score": {
+    "mean": 0.2869027334451989,
+    "std": 0.12429817077405572,
+    "sem": 0.03930653286385905,
+    "median": 0.28232344207339916,
+    "minimum": 0.05862292298488768,
+    "maximum": 0.4370697350419998,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. The 240-minute values are final run scores; missing values and fallbacks are marked.",
+  "feasibility_note": "Feasibility fractions refer to history observations, not all evaluated candidates."
+}

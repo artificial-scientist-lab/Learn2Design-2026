@@ -184,7 +184,7 @@ The active configuration is stored as a `SaveConfig` and embedded in every check
 
 All file I/O (checkpointing, human-readable export) is handled internally by the modular `dfbench.core.storage` layer. The Objective assembles a `CheckpointManager` (with serializer, storage backend, and path resolver) and a `RunDataExporter` behind the scenes using sensible defaults; these components are **not** user-facing constructor parameters. The `save_to_file_every` argument is the only storage-related knob exposed to the user; it sets the periodic checkpoint cadence on the internal manager.
 
-The storage components are still modular and individually testable (see [Storage & Checkpointing](Storage-and-Checkpointing)). Advanced users who need to swap a serializer, backend, or resolver can subclass `Objective` and override the internal assembly, or use the storage classes directly outside the Objective.
+The storage components are still modular and individually testable (see [Storage & Checkpointing](Architecture-Overview.md#4-storage-layer-corestorage)). Advanced users who need to swap a serializer, backend, or resolver can subclass `Objective` and override the internal assembly, or use the storage classes directly outside the Objective.
 
 ---
 
@@ -565,13 +565,13 @@ Each enabled aux history is index-aligned with `loss_history`: value-bearing sta
 
 ## I/O Methods
 
-All file I/O is handled internally by the modular `dfbench.core.storage` layer (see [Storage & Checkpointing](Storage-and-Checkpointing)). The Objective builds and applies the canonical `RunState` data contract; the serializer, backend, and resolver are assembled internally with sensible defaults.
+All file I/O is handled internally by the modular `dfbench.core.storage` layer (see [Storage & Checkpointing](Architecture-Overview.md#4-storage-layer-corestorage)). The Objective builds and applies the canonical `RunState` data contract; the serializer, backend, and resolver are assembled internally with sensible defaults.
 
 ### `save_run_data(algorithm_name=None, filepath=None, hyper_param_str=None) -> Path`
 
 Saves the full optimization state to a checkpoint file via the internal `CheckpointManager.save()`. The serializer (default `NpzCheckpointSerializer`) encodes a `RunState` snapshot; the backend (default `LocalFilesystemBackend`) writes it **atomically** (temp file in the same directory + `os.replace`), so an interrupted job never leaves a half-written file. If `algorithm_name` is not provided it defaults to `self.algorithm_str` (or `"unknown"`).
 
-The checkpoint embeds `RunMetadata` (problem/algo/budget identity, `SaveConfig`, and the problem's typed `ProblemSpec` container; see [Problems](Problems)), so the file is fully self-describing.
+The checkpoint embeds `RunMetadata` (problem/algo/budget identity, `SaveConfig`, and the problem's typed `ProblemSpec` container; see [Problems](Problems.md)), so the file is fully self-describing.
 
 Default path (built by `RunPathResolver`, then anchored to a directory by `LocalFilesystemBackend`): `<checkpoint_dir>/{budget_dir}/{problem}_{algo}_{hyper_param_str}_{timestamp}.npz`, absolute on disk. `checkpoint_dir` defaults to `./data/objective_run_data`. Set `RunPathResolver(algo_directory=True)` to add an `{algo}_{hyper_param_str}` subdirectory under `{budget_dir}`.
 
@@ -634,7 +634,7 @@ Every evaluation method follows the same pipeline internally:
 3. **`_log_evals(params, loss, grad, hessian, aux, time_exceeded)`**: checks the evaluation/time budget, resolves selected aux leaves before mutating histories, records all aligned histories, updates best/stagnation state, and returns whether the call was admitted.
 4. **`_log_to_file()`**: calls `CheckpointManager.tick(eval_count, state_factory)`, which checks the cadence (`save_every`, set from `save_to_file_every`), lazily builds a `RunState` only when a checkpoint is due, saves it through the internal `StorageBackend`, and returns the wall-clock duration of the save. The Objective advances `_start_time` by that duration so the checkpoint write does not consume wall-clock budget.
 
-> **Important:** These are private methods; do not call `_log()`, `_log_evals()`, or `_log_to_file()` directly from algorithm code. If you want manual logging, use the public `log_evaluation(params, loss, grad=None, hessian=None, aux=None)` method instead, which delegates to `_log()`. See the [JIT-compiled loop guide](Implementing-a-New-Algorithm#custom-jit-compiled-loops-with-log_evaluation) for details.
+> **Important:** These are private methods; do not call `_log()`, `_log_evals()`, or `_log_to_file()` directly from algorithm code. If you want manual logging, use the public `log_evaluation(params, loss, grad=None, hessian=None, aux=None)` method instead, which delegates to `_log()`. See the [JIT-compiled loop guide](Implementing-a-New-Algorithm.md#custom-jit-compiled-loops-with-log_evaluation) for details.
 
 Budget enforcement happens *after* the evaluation returns. This means the algorithm always receives a valid result, but once any budget is exceeded the history stops growing and `budget_exceeded` becomes `True`.
 

@@ -119,23 +119,26 @@ and batch size used by your algorithm against the official resource limits.
 
 ## Time budget
 
-Official budget per topology: exactly 4 hours of wall-clock time after
-`objective.start_logging()`. Objective-provided JIT warmup before
-`objective.start_logging()` does not count.
+Official optimization budget per topology: up to 4 hours, measured by
+`objective.time_elapsed` after `objective.start_logging()`. Algorithms may
+return earlier. Objective-provided JIT warmup before `objective.start_logging()`
+does not count.
 
-The full per-topology run is capped at 4 h 30 min from the start
-of the participant run. This includes any work before `objective.start_logging()`
-and after the Objective budget is exhausted.
+Additional time allowed for setup, permitted warmup, and result finalization
+does not extend the four-hour optimization budget.
 
 Concretely:
 
 - The clock starts when your algorithm calls `objective.start_logging()`.
-- Everything after that call counts toward the 4 hours, including Objective
+- Submission computation after that call counts toward the 4 hours, including Objective
   evaluation calls, batched / `vmap_*` variants, optimizer updates, surrogate
   inference, candidate generation, adaptation, and submission-side logging.
-- Once the 4-hour wall-clock budget is exhausted, `objective.budget_exceeded`
-  becomes `True`. Further calls to `objective.value` return immediately
-  without re-evaluating; the best feasible loss found so far is what counts.
+- Stop making evaluation calls when `objective.budget_exceeded` becomes `True`.
+  Evaluation methods can still perform computation after the budget expires,
+  but results outside the budget are not admitted to the scored history.
+  The best feasible loss admitted within the budget is what counts.
+- Time spent on organizer-managed result recording is excluded from
+  `objective.time_elapsed`; submission-side logging counts toward the budget.
 - JIT compilation time from Objective-provided `warmup_*()` calls before
   `objective.start_logging()` is not counted against the 4 hours.
 - Before calling `objective.start_logging()`, submissions may inspect documented

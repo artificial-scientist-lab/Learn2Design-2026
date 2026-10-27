@@ -6,9 +6,11 @@
 [![Static Badge](https://img.shields.io/badge/Codabench-Submit-4CB2AD)](https://submit.learn2design2026.com/competitions/4/)
 
 > [!IMPORTANT]
-> **The competition is now over!** We received final submissions from **111 teams
-> in Round 4**. We have started the final evaluations and plan to release the
-> results on **October 29th**.
+> **The Round 4 leaderboard and evaluation data are now available!** See the
+> [leaderboard](#round-4-leaderboard) and [detailed evaluation data](competition_data/round4/).
+>
+> The official winners will be announced at our NeurIPS competition workshop in
+> Sydney on **Friday, December 11, 2026**.
 >
 > Thank you to everyone who participated for your time, effort, and creative
 > approaches to this challenge!
@@ -51,20 +53,34 @@ Beyond gravitational-wave detection, Learn2Design-2026 asks a broader scientific
 **Can AI systems discover scientific instruments that go beyond human intuition while remaining physically meaningful and experimentally constrained?**
 
 More information is available in the accepted proposal for [Learn2Design-2026](Learn2Design_details.pdf).
+Its original hardware specifications are superseded by the [current evaluation specification](docs/submission.md#evaluation-hardware).
 
-## Round 3 leaderboard
+## Round 4 leaderboard
 
-The Round 3 leaderboard includes 67 participant submissions evaluated on the
-same ten hidden UIFO topologies. The figure compares their mean best feasible
-loss (lower is better) with the seven organizer baselines; error bars show one
-standard error of the mean across the ten runs.
+The official Round 4 leaderboard compares all **110 participants on the same
+ten UIFOs**, alongside the seven organizer baselines. Scores are mean best
+feasible loss (lower is better); error bars show one standard error of the mean.
 
 <p align="left">
-  <img src="media/round3_leaderboard.png" alt="Learn2Design 2026 Round 3 leaderboard with participant and organizer-baseline scores" width="720">
+  <a href="media/round4_leaderboard.png"><img src="media/round4_leaderboard.png" alt="Learn2Design 2026 official Round 4 leaderboard: all participants on ten UIFOs with SEM error bars" width="720"></a>
 </p>
 
+[Full high-resolution leaderboard](media/round4_leaderboard.png)
+
 Exact per-run results, convergence checkpoints, efficiency statistics, and
-participant reports are available in the [Round 3 evaluation data](competition_data/round3/).
+participant reports are available in the [Round 4 evaluation data](competition_data/round4/).
+
+### Top-ten comparison on 50 UIFOs
+
+Separate comparison of the ten leading teams on **50 UIFOs** each, including
+the ten official UIFOs. Error bars show one standard error of the mean.
+
+<p align="left">
+  <a href="media/round4_leaderboard_top10.png"><img src="media/round4_leaderboard_top10.png" alt="Learn2Design 2026 Round 4 separate top-ten comparison: mean feasible loss and SEM over fifty UIFOs per team" width="960"></a>
+</p>
+
+[High-resolution top-ten figure](media/round4_leaderboard_top10.png) ·
+[Fifty-UIFO comparison data](competition_data/round4/top10_50_uifos/)
 
 ## Prize money
 
@@ -115,7 +131,7 @@ as the starting point for describing each team's method in this joint analysis.
   requirements, and any supporting files through the [submission portal](https://submit.learn2design2026.com/).
 - You can submit as often as you want; for each monthly evaluation we use the last submission before that month's deadline.
 - Each evaluation runs it on 10 new held-out hidden topologies using the [standard H100 evaluation VM](docs/submission.md#evaluation-hardware).
-- Time budget per topology: exactly 4 hours of wall-clock time after `objective.start_logging()`.
+- Time budget per topology: up to 4 hours, measured by `objective.time_elapsed` after `objective.start_logging()`.
 - The best loss among setups [satisfying all constraints](docs/dfbench_overview.md#power-constraints-and-aux-diagnostics) will be recorded for each of the 10 runs.
 - If a run has no constraint-satisfying setup, we use the best constraint-satisfying loss from random search on that topology instead.
 - The arithmetic mean over the 10 recorded losses is your score. Lower is better.
@@ -265,13 +281,10 @@ Each component has parameters that can be optimized within certain
 For the topology string format, component-code mapping, and ways to instantiate
 UIFO topologies directly, see [Explanation of "Topology"](docs/dfbench_overview.md#explanation-of-topology).
 
-A [worked Voyager embedding](examples/voyager_uifo/README.md) supplies a 3×3 UIFO
-topology, full physical parameters, executable reference checks, and a custom
-`VoyagerUIFOProblem` usable through the normal `Objective` API. It also documents
-the overrides needed beyond the competition's bounded parameter vector.
-For a self-contained file to share, use [voyager_uifo_standalone.py](examples/voyager_uifo_standalone.py).
-The companion [random-initialization example](examples/evaluate_random_initializations.py)
-evaluates many parameter vectors in parallel batches through `Objective.vmap_value_aux`.
+For a smaller development problem with the same loss and constraints, see
+[`ConstrainedVoyagerProblem`](docs/dfbench/Problems.md#constrainedvoyagerproblem).
+The [batched evaluation API](docs/dfbench/Objective-API-Reference.md#batched-evaluation)
+supports evaluating multiple parameter vectors through the supplied `Objective`.
 
 The goal is to find algorithms that work well on any UIFO topology sampled from this search space; two example topologies are visualized in the figure below. Each evaluation runs on its own 10 hidden topologies.
 

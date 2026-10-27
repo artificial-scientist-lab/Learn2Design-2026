@@ -1,0 +1,11 @@
+rank,participant_id,run_number,score_loss,participant_best_feasible_loss,used_random_search_fallback,time_to_best_minutes,time_to_best_precision,evaluation_count,objective_time_seconds,evaluations_per_second,feasible_history_count,feasibility_observation_count,feasible_history_fraction
+109,trigerfly,1,4.868323951900022,,True,,unavailable,,,,,,
+109,trigerfly,2,4.763370745543731,,True,,unavailable,,,,,,
+109,trigerfly,3,4.8038028200437894,,True,,unavailable,,,,,,
+109,trigerfly,4,4.896929349827729,,True,,unavailable,,,,,,
+109,trigerfly,5,4.741984682169504,,True,,unavailable,,,,,,
+109,trigerfly,6,4.760178451105228,,True,,unavailable,,,,,,
+109,trigerfly,7,4.776533846217568,,True,,unavailable,,,,,,
+109,trigerfly,8,4.923079330349797,,True,,unavailable,,,,,,
+109,trigerfly,9,4.8410220689467645,,True,,unavailable,,,,,,
+109,trigerfly,10,4.820257207626317,,True,,unavailable,,,,,,

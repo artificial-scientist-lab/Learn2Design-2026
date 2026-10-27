@@ -162,4 +162,4 @@ from dfbench.problems import VoyagerProblem, VoyagerTuningProblem, ConstrainedVo
 from dfbench.benchmark import Benchmark, AlgorithmConfig, BenchmarkResult
 ```
 
-See [Storage Layer](Architecture-Overview#4-storage-layer-corestorage) for the full storage architecture and the individual component APIs, and [Problems](Problems.md) for the `ProblemSpec` container and the reconstructive contract.
+See [Storage Layer](Architecture-Overview.md#4-storage-layer-corestorage) for the full storage architecture and the individual component APIs, and [Problems](Problems.md) for the `ProblemSpec` container and the reconstructive contract.

@@ -1,0 +1,30 @@
+{
+  "rank": 91,
+  "participant_id": "panoslovesfesp4",
+  "mean_feasible_loss": 1.1387835144619236,
+  "score_std": 0.8979243620386278,
+  "score_sem": 0.28394861505956964,
+  "score_median": 0.6785796931832531,
+  "minimum_run_score": 0.4138632774827179,
+  "maximum_run_score": 3.0555623046206994,
+  "mean_time_to_best_minutes": 230.81005164821946,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 113921.3,
+  "mean_evaluations_per_second": 7.929928008379603,
+  "mean_feasible_history_fraction": 0.7046688497948812,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.3",
+  "evaluated_participant_count": 110,
+  "score": {
+    "mean": 1.1387835144619236,
+    "std": 0.8979243620386278,
+    "sem": 0.28394861505956964,
+    "median": 0.6785796931832531,
+    "minimum": 0.4138632774827179,
+    "maximum": 3.0555623046206994,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. The 240-minute values are final run scores; missing values and fallbacks are marked.",
+  "feasibility_note": "Feasibility fractions refer to history observations, not all evaluated candidates."
+}

@@ -1,0 +1,30 @@
+{
+  "rank": 26,
+  "participant_id": "subagent67",
+  "mean_feasible_loss": 0.03189670039981371,
+  "score_std": 0.11466170956758118,
+  "score_sem": 0.036259216264227685,
+  "score_median": 0.007590981585305226,
+  "minimum_run_score": -0.10117663670283084,
+  "maximum_run_score": 0.23431088199440508,
+  "mean_time_to_best_minutes": 239.90033628940583,
+  "time_to_best_run_count": 10,
+  "mean_evaluation_count": 131269.6,
+  "mean_evaluations_per_second": 9.115552514580507,
+  "mean_feasible_history_fraction": 0.9313130574230575,
+  "failed_runs": 0,
+  "fallback_runs": 0,
+  "schema_version": "1.3",
+  "evaluated_participant_count": 110,
+  "score": {
+    "mean": 0.03189670039981371,
+    "std": 0.11466170956758118,
+    "sem": 0.036259216264227685,
+    "median": 0.007590981585305226,
+    "minimum": -0.10117663670283084,
+    "maximum": 0.23431088199440508,
+    "run_count": 10
+  },
+  "checkpoint_note": "Intermediate checkpoints are conservative upper bounds unless marked exact. The 240-minute values are final run scores; missing values and fallbacks are marked.",
+  "feasibility_note": "Feasibility fractions refer to history observations, not all evaluated candidates."
+}

@@ -12,5 +12,7 @@ their evaluation outcomes.
   Round 2 participants.
 - [Round 3](round3/): results and convergence statistics for all evaluated
   Round 3 participants.
+- [Round 4](round4/): results and convergence statistics for all scored Round 4 participants. Includes a separate analysis of the top 10, using an additional 40 UIFOs:
+  [top-ten comparison on fifty UIFOs](round4/top10_50_uifos/).
 
 Each round directory documents its files, metric definitions, and precision.

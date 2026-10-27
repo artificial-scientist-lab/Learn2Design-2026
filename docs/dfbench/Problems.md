@@ -36,7 +36,7 @@ Defines the minimal interface every problem must implement:
 
 **Rationale: bounded problem contract:** Problems expose the bounded loss only; `Objective` owns any mapping required by algorithms that search in unbounded coordinates.
 
-**Rationale: reconstructive spec:** A checkpoint is only useful for resume or provenance if the originating problem can be rebuilt. `to_spec()` encodes the problem's constructor arguments so a saved run is fully self-describing (see [Storage & Checkpointing](Storage-and-Checkpointing)).
+**Rationale: reconstructive spec:** A checkpoint is only useful for resume or provenance if the originating problem can be rebuilt. `to_spec()` encodes the problem's constructor arguments so a saved run is fully self-describing (see [Storage & Checkpointing](Architecture-Overview.md#4-storage-layer-corestorage)).
 
 ### `OpticalSetupProblem` (Optical Base)
 
@@ -49,7 +49,7 @@ Extends `ContinuousProblem` with optics-specific functionality shared by all Dif
 - **`signal_floor`:** All concrete problems floor detector signal magnitudes before sensitivity normalization. Defaults to `1e-20`.
 - **`print_bounds()`:** Prints the effective per-parameter bounds currently used by the problem.
 
-> **Note:** `OpticalSetupProblem` no longer has an `output_to_files` method. Human-readable JSON/PNG output is now a *derived view* produced by `RunDataExporter` from a `RunState` snapshot (see [I/O Methods](Objective-API-Reference#io-methods)). Keeping I/O on the problem was a responsibility violation: it mixed file layout, plotting, and timestamping into the mathematical problem definition.
+> **Note:** `OpticalSetupProblem` no longer has an `output_to_files` method. Human-readable JSON/PNG output is now a *derived view* produced by `RunDataExporter` from a `RunState` snapshot (see [I/O Methods](Objective-API-Reference.md#io-methods)). Keeping I/O on the problem was a responsibility violation: it mixed file layout, plotting, and timestamping into the mathematical problem definition.
 
 ---
 
@@ -229,7 +229,7 @@ The constrained problems also expose a JIT-compiled `objective_function_aux(para
 
 Because `aux` is a JAX pytree, `objective_function_aux` vmapps cleanly: a batched call adds a leading batch dim to every leaf, including the `power_values` sub-arrays.
 
-The `Objective` wraps this with `value_aux`, `value_and_grad_aux`, `vmap_value_aux`, and `vmap_value_and_grad_aux`. These explicit methods—and standard value-bearing methods when an aux save token is selected—thread aux through logging without a second forward pass. Each aux field has its own token (`sensitivity_loss`, `penalty`, `is_feasible`, `power_values`, `violations`) plus a `batched_*` variant and `aux` / `batched_aux` convenience aliases. Derivative-only calls do not produce a primal aux pytree and append `None` to enabled aux histories. When a `batched_*` token is off and the non-batched token is on, aux from every batched value-bearing call, including a singleton batch, is reduced to the representative point picked by the loss minimum. `Objective.best_is_feasible` reports the feasibility of the best-loss point from that recorded history. Full reference in the [Objective API Reference](Objective-API-Reference).
+The `Objective` wraps this with `value_aux`, `value_and_grad_aux`, `vmap_value_aux`, and `vmap_value_and_grad_aux`. These explicit methods—and standard value-bearing methods when an aux save token is selected—thread aux through logging without a second forward pass. Each aux field has its own token (`sensitivity_loss`, `penalty`, `is_feasible`, `power_values`, `violations`) plus a `batched_*` variant and `aux` / `batched_aux` convenience aliases. Derivative-only calls do not produce a primal aux pytree and append `None` to enabled aux histories. When a `batched_*` token is off and the non-batched token is on, aux from every batched value-bearing call, including a singleton batch, is reduced to the representative point picked by the loss minimum. `Objective.best_is_feasible` reports the feasibility of the best-loss point from that recorded history. Full reference in the [Objective API Reference](Objective-API-Reference.md).
 
 ---
 
@@ -391,6 +391,6 @@ If you add a new `ContinuousProblem` subclass:
 
 You do not need to override `to_problem_spec()`; the default implementation wraps `to_spec()` into the typed container automatically.
 
-See [I/O Methods](Objective-API-Reference#io-methods) for how the spec is embedded in checkpoints.
+See [I/O Methods](Objective-API-Reference.md#io-methods) for how the spec is embedded in checkpoints.
 
 ---
